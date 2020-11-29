@@ -1,0 +1,50 @@
+{
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cezaraugusto/webpack-open-chrome-extension.git"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "name": "webpack-open-chrome-extension",
+  "version": "0.2.0",
+  "description": "Programatically open a web extension in a Chrome browser via webpack plugin",
+  "main": "module.js",
+  "author": {
+    "name": "Cezar Augusto",
+    "email": "boss@cezaraugusto.net",
+    "url": "https://cezaraugusto.net"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "files": [
+    "module.js",
+    "browser.config.js"
+  ],
+  "keywords": [
+    "webpack",
+    "plugin",
+    "chrome",
+    "open",
+    "plugin",
+    "browser",
+    "web",
+    "extension",
+    "web-ext",
+    "webextension"
+  ],
+  "peerDependencies": {
+    "webpack": "^5.0.0"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^6.3.2",
+    "jest": "^26.6.1",
+    "webpack": "^5.9.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "chrome-launcher": "^0.13.4"
+  }
+}
