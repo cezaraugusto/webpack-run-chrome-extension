@@ -1,13 +1,12 @@
-const ChromeLauncher = require('chrome-launcher')
-const browserConfig = require('./browser.config')
+const {
+  webSocketServer,
+  webSocketServerBroadcast
+} = require('./steps/serveSocket')
+const serveExtension = require('./steps/serveExtension')
 
-process.on('SIGINT', async () => await ChromeLauncher.killAll())
-process.on('SIGTERM', async () => await ChromeLauncher.killAll())
-
-const defaultFlags = ChromeLauncher
-  .Launcher.defaultFlags()
-  .filter(flag => flag !== '--disable-extensions')
-
+// The plugin works by opening a Node websocket server
+// watched by webpack that connects to an extension
+// responsible for triggering reloads on all extensions.
 class OpenChromeExtension {
   constructor (options = {}) {
     this.isChromeOpen = false
@@ -16,34 +15,22 @@ class OpenChromeExtension {
     this.browserFlags = options.browserFlags
     this.userDataDir = options.userDataDir
     this.startingUrl = options.startingUrl
+    this.autoReload = options.autoReload
   }
 
   apply (compiler) {
-    // Do nothing on production
+    // We don't need to watch anything on production
     if (compiler.options.mode === 'production') return
 
-    compiler.hooks.afterEmit.tapAsync(
-      'webpack-open-chrome-extension',
-      async (compilation, callback) => {
-      const extensionPath = this.extensionPath
+    // Kickstart a wss server so extension can start listening to changes.
+    const wss = webSocketServer('localhost', 8082)
 
-      // The context we run is within webpack watch mode
-      // so we need a way to prevent Chrome instances
-      // from infinite loops
-			if (this.isChromeOpen) return callback()
-
-      const browserConfigOptions = {
-        defaultFlags: defaultFlags || [],
-        browserFlags: this.browserFlags || [],
-        userDataDir: this.userDataDir,
-        startingUrl: this.startingUrl
-      }
-
-      const chromeConfig = browserConfig(extensionPath, browserConfigOptions)
-      const launchedChrome = await ChromeLauncher.launch(chromeConfig)
-      this.isChromeOpen = launchedChrome.pid != null
-      callback()
+    compiler.hooks.afterEmit.tapAsync('open-chrome-extension', (_, done) => {
+      webSocketServerBroadcast(wss, { status: 'reloadRequested' })
+      done()
     })
+
+    serveExtension(this)
   }
 }
 

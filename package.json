@@ -45,6 +45,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "chrome-launcher": "^0.13.4"
+    "chrome-launcher": "^0.13.4",
+    "ws": "^7.4.1"
   }
 }

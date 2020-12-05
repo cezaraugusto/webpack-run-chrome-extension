@@ -1,5 +1,5 @@
-/* global describe, test, expect */
-const webpack = require('webpack')
+/* global jest, describe, beforeEach, it, webpack, expect */
+// const webpack = require('webpack')
 const OpenChromeExtension = require('./module')
 const { extensionPathOptionConfig } = require('./fixtures/webpack.config')
 

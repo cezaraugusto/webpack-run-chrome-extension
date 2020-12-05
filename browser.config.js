@@ -1,3 +1,7 @@
+const path = require('path')
+
+const reloadExtension = path.resolve(__dirname, 'extensions/reload')
+
 module.exports = (extensionDistPath, configOptions) => {
   let options = configOptions
 
@@ -6,9 +10,18 @@ module.exports = (extensionDistPath, configOptions) => {
       defaultFlags: [],
       browserFlags: [],
       userDataDir: null,
-      startingUrl: null
+      startingUrl: null,
+      autoReload: true
     }
   }
+
+  const extensionsToLoad = []
+
+  if (options.autoReload) {
+    extensionsToLoad.push(reloadExtension)
+  }
+
+  extensionsToLoad.push(extensionDistPath)
 
   return {
     ignoreDefaultFlags: true,
@@ -20,7 +33,7 @@ module.exports = (extensionDistPath, configOptions) => {
     // Any of http://peter.sh/experiments/chromium-command-line-switches/
     chromeFlags: [
       ...options.defaultFlags,
-      `--load-extension=${extensionDistPath}`,
+      `--load-extension=${extensionsToLoad.join()}`,
       ...options.browserFlags
     ]
   }

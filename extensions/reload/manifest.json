@@ -1,0 +1,10 @@
+{
+    "name": "webpack-open-chrome-extension Reload Mmanager",
+    "version": "1.0",
+    "manifest_version": 2,
+    "background": {
+      "scripts": ["background.js"]
+  },
+  "permissions": ["management", "tabs"]
+}
+
