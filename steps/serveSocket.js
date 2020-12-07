@@ -37,7 +37,7 @@ function webSocketServer (host, port) {
 function webSocketServerBroadcast (server, message) {
   server.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify({ status: 'reloadRequested' }))
+      client.send(JSON.stringify(message))
     }
   })
 }

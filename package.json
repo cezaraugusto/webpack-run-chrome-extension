@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "chrome-launcher": "^0.13.4",
+    "find-free-port-sync": "^1.0.0",
     "ws": "^7.4.1"
   }
 }

@@ -3,6 +3,10 @@ const {
   webSocketServerBroadcast
 } = require('./steps/serveSocket')
 const serveExtension = require('./steps/serveExtension')
+const generateReloadExtension = require('./steps/generateReloadExtension')
+const findFreePort = require('find-free-port-sync')
+
+const port = findFreePort({ start: 1, end: 5000 })
 
 // The plugin works by opening a Node websocket server
 // watched by webpack that connects to an extension
@@ -22,8 +26,11 @@ class OpenChromeExtension {
     // We don't need to watch anything on production
     if (compiler.options.mode === 'production') return
 
-    // Kickstart a wss server so extension can start listening to changes.
-    const wss = webSocketServer('localhost', 8082)
+    const wss = webSocketServer('localhost', port)
+
+    // Generate the reload extension on the fly since
+    // we can't tell what port is available before runtime.
+    generateReloadExtension(port)
 
     compiler.hooks.afterEmit.tapAsync('open-chrome-extension', (_, done) => {
       webSocketServerBroadcast(wss, { status: 'reloadRequested' })
