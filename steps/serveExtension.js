@@ -10,7 +10,7 @@ process.on('SIGTERM', async () => {
 
 process.on('unhandledRejection', (error) => { throw error })
 
-module.exports = async function (self) {
+module.exports = async function (self = {}) {
   const defaultFlags = ChromeLauncher
     .Launcher.defaultFlags()
     .filter(flag => flag !== '--disable-extensions')
