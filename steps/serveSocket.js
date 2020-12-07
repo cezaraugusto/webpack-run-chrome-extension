@@ -1,6 +1,6 @@
 const WebSocket = require('ws')
 
-function webSocketServer (host, port) {
+module.exports = function (host, port) {
   const webSocketServer = new WebSocket.Server({ host, port })
 
   webSocketServer.on('connection', (ws) => {
@@ -32,17 +32,4 @@ function webSocketServer (host, port) {
   })
 
   return webSocketServer
-}
-
-function webSocketServerBroadcast (server, message) {
-  server.clients.forEach((client) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(message))
-    }
-  })
-}
-
-module.exports = {
-  webSocketServer,
-  webSocketServerBroadcast
 }

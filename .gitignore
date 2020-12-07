@@ -1,3 +1,5 @@
+./extensions/reload/background.js
+
 # Logs
 logs
 *.log
