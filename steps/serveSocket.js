@@ -1,7 +1,9 @@
 const WebSocket = require('ws')
 
-module.exports = function (host, port) {
-  const webSocketServer = new WebSocket.Server({ host, port })
+process.on('unhandledRejection', (error) => { throw error })
+
+module.exports = function (port) {
+  const webSocketServer = new WebSocket.Server({ host: 'localhost', port })
 
   webSocketServer.on('connection', (ws) => {
     ws.send(JSON.stringify({ status: 'serverReady' }))

@@ -3,7 +3,7 @@ const ChromeLauncher = require('chrome-launcher')
 const serveExtension = require('./steps/serveExtension')
 const webpack = require('webpack')
 const OpenChromeExtension = require('./module')
-const { extensionPathOptionConfig } = require('./fixtures/webpack.config')
+const extensionPathOptionConfig = require('./fixtures/webpack.config')
 
 // OpenChromeExtension is now a mock constructor
 jest.mock('./module')

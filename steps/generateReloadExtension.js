@@ -1,6 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 
+process.on('unhandledRejection', (error) => { throw error })
+
 module.exports = function (port) {
   const reloadExtension = path
     .resolve(__dirname, '../extensions/reload')

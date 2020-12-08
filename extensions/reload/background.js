@@ -1,5 +1,5 @@
 /* global chrome */
-const ws = new window.WebSocket('ws://localhost:3148')
+const ws = new window.WebSocket('ws://localhost:8080')
 
 ws.onopen = () => {
   ws.send(JSON.stringify({ status: 'clientReady' }))

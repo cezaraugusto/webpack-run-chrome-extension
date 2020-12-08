@@ -41,7 +41,8 @@ new WebpackOpenChromeExtension({
   ],
   userDataDir: 'path/to/user/data/dir',
   startingUrl: 'https://example.com',
-  autoReload: false
+  autoReload: false,
+  port: 8081
 })
 ```
 
@@ -95,6 +96,12 @@ What URL to start the browser with. Defaults to `about:blank`
 Type: `boolean`
 
 Whether to enable auto-reload on save. Defaults to `true`
+
+##### port (optional)
+
+Type: `number`
+
+What port should run the extension reloader. Defaults to `8080`
 
 ## License
 
