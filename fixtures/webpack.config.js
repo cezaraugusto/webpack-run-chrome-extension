@@ -1,4 +1,5 @@
 const path = require('path')
+
 const OpenChromeExtension = require('../module')
 
 module.exports = {

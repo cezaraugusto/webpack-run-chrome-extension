@@ -21,6 +21,7 @@ async function launchChrome (opts = {}) {
 
   try {
     await chromeInstance.launch()
+
     return Promise.resolve(spawnStub)
   } catch (err) {
     return Promise.reject(err)
@@ -44,6 +45,6 @@ ChromeLauncher.Launcher.defaultFlags = jest.fn().mockReturnValue([
   '--force-fieldtrials=*BackgroundTracing/default/'
 ])
 ChromeLauncher.killAll = jest.fn()
-ChromeLauncher.launch = async (opts) => await launchChrome(opts)
+ChromeLauncher.launch = (opts) => launchChrome(opts)
 
 module.exports = ChromeLauncher

@@ -52,7 +52,7 @@ async function reloadExtension (extensionId) {
 
 async function setEnabled (extensionId, value) {
   if (extensionId === chrome.runtime.id) {
-    Promise.resolve()
+    return Promise.resolve()
   }
 
   await new Promise((resolve) => {

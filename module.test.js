@@ -1,11 +1,12 @@
-/* global jest, describe, beforeEach, afterEach, afterAll, it, expect */
+/* global jest, describe, beforeEach, afterEach, it, expect */
 const ChromeLauncher = require('chrome-launcher')
-const serveExtension = require('./steps/serveExtension')
 const webpack = require('webpack')
-const OpenChromeExtension = require('./module')
+
+const serveExtension = require('./steps/serveExtension')
+const RunChromeExtension = require('./module')
 const webpackConfig = require('./fixtures/webpack.config')
 
-// OpenChromeExtension is now a mock constructor
+// RunChromeExtension is now a mock constructor
 jest.mock('./module')
 
 describe('webpack-run-chrome-extension', () => {
@@ -17,14 +18,16 @@ describe('webpack-run-chrome-extension', () => {
 
         // Webpack config calls plugin
         const configArgs = OpenChromeExtension.mock.calls[0][0]
-        expect(OpenChromeExtension).toBeCalledTimes(1)
-        expect(OpenChromeExtension).toBeCalledWith(configArgs)
+
+        expect(RunChromeExtension).toBeCalledTimes(1)
+        expect(RunChromeExtension).toBeCalledWith(configArgs)
         done()
       })
     })
 
     describe('serveExtension', () => {
       let spy
+
       beforeEach(() => {
         spy = jest.spyOn(ChromeLauncher, 'launch')
       })
@@ -40,6 +43,7 @@ describe('webpack-run-chrome-extension', () => {
 
         const { chromeFlags } = await ChromeLauncher.launch.mock.calls[0][0]
         const flag = chromeFlags.find(flag => flag.startsWith('--load-extension'))
+
         expect(flag.endsWith('my/extension/path')).toBe(true)
       })
 
@@ -63,6 +67,7 @@ describe('webpack-run-chrome-extension', () => {
         await serveExtension({ userDataDir: 'my/profile/dir' })
 
         const { userDataDir } = await ChromeLauncher.launch.mock.calls[0][0]
+
         expect(userDataDir).toBe('my/profile/dir')
       })
 
@@ -70,6 +75,7 @@ describe('webpack-run-chrome-extension', () => {
         await serveExtension({ startingUrl: 'my/starting/url' })
 
         const { startingUrl } = await ChromeLauncher.launch.mock.calls[0][0]
+
         expect(startingUrl).toBe('my/starting/url')
       })
 
@@ -78,6 +84,7 @@ describe('webpack-run-chrome-extension', () => {
 
         const { chromeFlags } = await ChromeLauncher.launch.mock.calls[0][0]
         const flag1 = chromeFlags.find(flag => flag.startsWith('--load-extension'))
+
         expect(flag1.endsWith('reload,')).toBe(true)
       })
 
@@ -88,6 +95,7 @@ describe('webpack-run-chrome-extension', () => {
 
           const { chromeFlags } = await ChromeLauncher.launch.mock.calls[0][0]
           const flag1 = chromeFlags.find(flag => flag.startsWith('--load-extension'))
+
           expect(flag1.endsWith('reload')).not.toBe(true)
         }
       )

@@ -9,7 +9,7 @@ const serveExtension = require('./steps/serveExtension')
 // The plugin works by opening a Node websocket server
 // watched by webpack that connects to an extension
 // responsible for triggering reloads on all extensions.
-class OpenChromeExtension {
+class RunChromeExtension {
   constructor (options = {}) {
     // User-defined options
     this.port = options.port
@@ -41,4 +41,4 @@ class OpenChromeExtension {
   }
 }
 
-module.exports = OpenChromeExtension
+module.exports = RunChromeExtension

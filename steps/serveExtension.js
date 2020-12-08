@@ -1,4 +1,5 @@
 const ChromeLauncher = require('chrome-launcher')
+
 const browserConfig = require('../browser.config')
 
 process.on('SIGINT', async () => {
@@ -26,5 +27,6 @@ module.exports = async function (self = {}) {
 
   // Set user defaults to browser
   const chromeConfig = browserConfig(self.extensionPath, browserConfigOptions)
-  return await ChromeLauncher.launch(chromeConfig)
+
+  await ChromeLauncher.launch(chromeConfig)
 }

@@ -15,6 +15,7 @@ module.exports = function (port) {
     const result = data.replace(/__PORT__/g, port)
 
     const backgroundPath = path.join(reloadExtension, 'background.js')
+
     fs.writeFile(backgroundPath, result, 'utf8', (error) => {
       if (error) return console.log(error)
     })

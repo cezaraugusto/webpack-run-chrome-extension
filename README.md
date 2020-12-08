@@ -32,12 +32,12 @@ If you want to watch for file changes in your extension, `watch` mode must be en
 
 ```diff
 // webpack config file
-+ const WebpackRunChromeExtension = require('webpack-run-chrome-extension')
++ const RunChromeExtension = require('webpack-run-chrome-extension')
 
 module.exports {
 +  watch: true,
   plugins: [
-+   new WebpackRunChromeExtension({
++   new RunChromeExtension({
 +     extensionPath: 'path/to/extension'
 +   })
   ]
@@ -47,9 +47,9 @@ module.exports {
 **Lazy sample**
 
 ```js
-const WebpackRunChromeExtension = require('webpack-run-chrome-extension')
+const RunChromeExtension = require('webpack-run-chrome-extension')
 
-new WebpackRunChromeExtension({
+new RunChromeExtension({
   extensionPath: 'path/to/extension/dir', // Only required field
   browserFlags: [
     '--enable-experimental-extension-apis',
@@ -65,7 +65,7 @@ new WebpackRunChromeExtension({
 
 ## API
 
-### new WebpackRunChromeExtension(options)
+### new RunChromeExtension(options)
 
 #### Options
 
