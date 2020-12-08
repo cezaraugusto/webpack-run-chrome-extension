@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:fixture": "webpack --config='./fixtures/webpack.config.js'"
+    "test:fixture": "webpack --watch --config='./fixtures/webpack.config.js'"
   },
   "files": [
     "module.js",
@@ -41,7 +41,8 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.3.2",
-    "jest": "^26.6.1"
+    "jest": "^26.6.1",
+    "jest-websocket-mock": "^2.2.0"
   },
   "dependencies": {
     "chrome-launcher": "^0.13.4",

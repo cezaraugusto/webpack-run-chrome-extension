@@ -1,4 +1,5 @@
-background.js
+dist
+extensions/reload/background.js
 
 # Logs
 logs

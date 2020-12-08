@@ -1,6 +1,13 @@
 /* global chrome */
 const ws = new window.WebSocket('ws://localhost:8080')
 
+// Gracefully close websocket connection before unloading app
+window.onbeforeunload = () => {
+  ws.onclose = () => {
+    ws.close()
+  }
+}
+
 ws.onopen = () => {
   ws.send(JSON.stringify({ status: 'clientReady' }))
   console.log(

@@ -1,19 +1,17 @@
-/* global jest, describe, beforeEach, afterEach, it, expect */
+/* global jest, describe, beforeEach, afterEach, afterAll, it, expect */
 const ChromeLauncher = require('chrome-launcher')
 const serveExtension = require('./steps/serveExtension')
 const webpack = require('webpack')
 const OpenChromeExtension = require('./module')
-const extensionPathOptionConfig = require('./fixtures/webpack.config')
+const webpackConfig = require('./fixtures/webpack.config')
 
 // OpenChromeExtension is now a mock constructor
 jest.mock('./module')
 
 describe('webpack-open-chrome-extension', () => {
   describe('webpack config', () => {
-    it('calls plugin with correct args', (cb) => {
-      const extensionPathConfig = extensionPathOptionConfig()
-
-      webpack(extensionPathConfig, (error, stats) => {
+    it('calls plugin with correct args', (done) => {
+      webpack(webpackConfig, (error, stats) => {
         if (error) console.error(error)
         if (stats.hasErrors()) console.log(stats.toString())
 
@@ -21,7 +19,7 @@ describe('webpack-open-chrome-extension', () => {
         const configArgs = OpenChromeExtension.mock.calls[0][0]
         expect(OpenChromeExtension).toBeCalledTimes(1)
         expect(OpenChromeExtension).toBeCalledWith(configArgs)
-        cb()
+        done()
       })
     })
 

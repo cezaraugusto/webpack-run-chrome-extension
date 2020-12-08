@@ -15,6 +15,11 @@ module.exports = function (port) {
       console.log('[Reload Service] Error', error)
     })
 
+    ws.on('close', (reason) => {
+      console.log('[Reload Service] Service closed.', reason)
+      webSocketServer.close()
+    })
+
     // We're only ready when the extension says so
     ws.on('message', (msg) => {
       const message = JSON.parse(msg)

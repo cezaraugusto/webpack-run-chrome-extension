@@ -3,7 +3,6 @@ const OpenChromeExtension = require('../module')
 
 module.exports = {
   mode: 'development',
-  watch: true,
   entry: {
     background: path.resolve(__dirname, './testExtension/src/background.js')
   },
