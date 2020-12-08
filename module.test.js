@@ -8,7 +8,7 @@ const webpackConfig = require('./fixtures/webpack.config')
 // OpenChromeExtension is now a mock constructor
 jest.mock('./module')
 
-describe('webpack-open-chrome-extension', () => {
+describe('webpack-run-chrome-extension', () => {
   describe('webpack config', () => {
     it('calls plugin with correct args', (done) => {
       webpack(webpackConfig, (error, stats) => {

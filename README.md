@@ -1,14 +1,14 @@
-[action-image]: https://github.com/cezaraugusto/webpack-open-chrome-extension/workflows/CI/badge.svg
-[action-url]: https://github.com/cezaraugusto/webpack-open-chrome-extension/actions
-[npm-image]: https://img.shields.io/npm/v/webpack-open-chrome-extension.svg
-[npm-url]: https://npmjs.org/package/webpack-open-chrome-extension
-# webpack-open-chrome-extension [![workflow][action-image]][action-url] [![npm][npm-image]][npm-url]
+[action-image]: https://github.com/cezaraugusto/webpack-run-chrome-extension/workflows/CI/badge.svg
+[action-url]: https://github.com/cezaraugusto/webpack-run-chrome-extension/actions
+[npm-image]: https://img.shields.io/npm/v/webpack-run-chrome-extension.svg
+[npm-url]: https://npmjs.org/package/webpack-run-chrome-extension
+# webpack-run-chrome-extension [![workflow][action-image]][action-url] [![npm][npm-image]][npm-url]
 
 <img src="./logo.png" align=right height=180>
 
 > Build your extension on Chrome with auto-reload support
 
-Opens up a new Chrome instance with an extension loaded. The browser instance accepts all flags Chrome does (see [chromeFlags](#chromeFlags)) and loads on a clean profile by default. The extension loaded includes default live-reload support.
+Opens up a new Chrome instance with an extension loaded. The browser instance accepts all flags Chrome does (see [browserFlags](#browserFlags)) and loads on a clean profile by default. The extension loaded includes default live-reload support.
 
 ## Highlights
 
@@ -24,44 +24,48 @@ yarn add webpack-chrome-extension-launcher -D
 
 ## Usage
 
-See [webpack.config.js example](./fixtures/webpack.config.js).
+```
+yarn add webpack-run-chrome-extension -D
+```
 
+If you want to watch for file changes in your extension, `watch` mode must be enabled.
+
+```diff
+// webpack config file
++ const WebpackRunChromeExtension = require('webpack-run-chrome-extension')
+
+module.exports {
++  watch: true,
+  plugins: [
++   new WebpackRunChromeExtension({
++     extensionPath: 'path/to/extension'
++   })
+  ]
+}
 ```
-yarn add WebpackOpenChromeExtension
-```
+
+**Lazy sample**
 
 ```js
-const WebpackOpenChromeExtension = require('webpack-open-chrome-extension')
+const WebpackRunChromeExtension = require('webpack-run-chrome-extension')
 
-new WebpackOpenChromeExtension({
+new WebpackRunChromeExtension({
   extensionPath: 'path/to/extension/dir', // Only required field
-  chromeFlags: [
+  browserFlags: [
     '--enable-experimental-extension-apis',
     '--embedded-extension-options'
   ],
   userDataDir: 'path/to/user/data/dir',
   startingUrl: 'https://example.com',
-  autoReload: false,
+  autoReload: true,
   port: 8081
 })
 ```
 
-```diff
-+ const WebpackOpenChromeExtension = require('webpack-open-chrome-extension')
-
-module.exports {
-  plugins: [
-+   new WebpackOpenChromeExtension({
-+     extensionPath: 'path/to/extension'
-+   })
-  ]
-}
-
-```
 
 ## API
 
-### new WebpackOpenChromeExtension(options)
+### new WebpackRunChromeExtension(options)
 
 #### Options
 
@@ -71,7 +75,7 @@ Type: `string`
 
 Path to your extension. Must point to the same directory as the manifest file.
 
-##### chromeFlags (optional)
+##### browserFlags (optional)
 
 Type: `Array<string>`
 

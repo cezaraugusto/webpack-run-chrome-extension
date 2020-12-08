@@ -1,5 +1,5 @@
 {
-    "name": "webpack-open-chrome-extension Reload Mmanager",
+    "name": "⌘ Chrome Extension Reload Manager",
     "version": "1.0",
     "manifest_version": 2,
     "background": {

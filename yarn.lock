@@ -1842,11 +1842,6 @@ find-cache-dir@^3.3.1:
     make-dir "^3.0.2"
     pkg-dir "^4.1.0"
 
-find-free-port-sync@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/find-free-port-sync/-/find-free-port-sync-1.0.0.tgz#10c9007655b6b65a7900e79d391e8da21e31cc19"
-  integrity sha512-wRkO8crYqjaTvCnqEfQGuV8LOp4JO0Ctjn6qROGPcradK+6jQ7giLMGLnKlNxQm6dEdYD3/TBABQ7Xi/5ZhWcg==
-
 find-up@^4.0.0, find-up@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"

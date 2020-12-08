@@ -15,8 +15,8 @@ module.exports = function (port) {
       console.log('[Reload Service] Error', error)
     })
 
-    ws.on('close', (reason) => {
-      console.log('[Reload Service] Service closed.', reason)
+    ws.on('close', () => {
+      console.log('[Reload Service] Watch mode closed. Exiting...')
       webSocketServer.close()
     })
 
