@@ -17,7 +17,7 @@ describe('webpack-run-chrome-extension', () => {
         if (stats.hasErrors()) console.log(stats.toString())
 
         // Webpack config calls plugin
-        const configArgs = OpenChromeExtension.mock.calls[0][0]
+        const configArgs = RunChromeExtension.mock.calls[0][0]
 
         expect(RunChromeExtension).toBeCalledTimes(1)
         expect(RunChromeExtension).toBeCalledWith(configArgs)
