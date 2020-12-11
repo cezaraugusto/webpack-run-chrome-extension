@@ -26,15 +26,6 @@ describe('webpack-run-chrome-extension', () => {
     })
 
     describe('serveExtension', () => {
-      let spy
-
-      beforeEach(() => {
-        spy = jest.spyOn(ChromeLauncher, 'launch')
-      })
-      afterEach(() => {
-        spy.mockRestore()
-      })
-
       it('`extensionPath` config sets respective browser flag', async () => {
         await serveExtension({
           autoReload: false,
