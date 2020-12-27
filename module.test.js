@@ -26,6 +26,15 @@ describe('webpack-run-chrome-extension', () => {
     })
 
     describe('serveExtension', () => {
+      let spy
+
+      beforeEach(() => {
+        spy = jest.spyOn(ChromeLauncher, 'launch')
+      })
+      afterEach(() => {
+        spy.mockRestore()
+      })
+
       it('`extensionPath` config sets respective browser flag', async () => {
         await serveExtension({
           autoReload: false,
@@ -76,7 +85,7 @@ describe('webpack-run-chrome-extension', () => {
         const { chromeFlags } = await ChromeLauncher.launch.mock.calls[0][0]
         const flag1 = chromeFlags.find(flag => flag.startsWith('--load-extension'))
 
-        expect(flag1.endsWith('reload,')).toBe(true)
+        expect(flag1.endsWith('extension,')).toBe(true)
       })
 
       it(
@@ -87,7 +96,7 @@ describe('webpack-run-chrome-extension', () => {
           const { chromeFlags } = await ChromeLauncher.launch.mock.calls[0][0]
           const flag1 = chromeFlags.find(flag => flag.startsWith('--load-extension'))
 
-          expect(flag1.endsWith('reload')).not.toBe(true)
+          expect(flag1.endsWith('extension')).not.toBe(true)
         }
       )
 
@@ -100,7 +109,7 @@ describe('webpack-run-chrome-extension', () => {
           const flags = chromeFlags.find(flag => flag.startsWith('--load-extension'))
           const [flag1, flag2] = flags.split(',')
 
-          expect(flag1.endsWith('reload')).toBe(true)
+          expect(flag1.endsWith('extension')).toBe(true)
           expect(flag2.endsWith('my/extension/path')).toBe(true)
         }
       )
