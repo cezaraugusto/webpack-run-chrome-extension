@@ -1,6 +1,6 @@
 const path = require('path')
 
-const reloadExtension = path.resolve(__dirname, 'extensions/reload')
+const reloadExtension = path.resolve(__dirname, 'manager-extension')
 
 module.exports = (extensionDistPath, configOptions) => {
   let options = configOptions

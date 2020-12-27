@@ -1,10 +1,9 @@
 {
-    "name": "⌘ Chrome Extension Reload Manager",
+    "name": "⌘ Extension Manager",
     "version": "1.0",
     "manifest_version": 2,
     "background": {
-      "scripts": ["background.js"]
+      "scripts": ["reloadService.js", "initialTab.js"]
   },
   "permissions": ["management", "tabs"]
 }
-
