@@ -8,15 +8,15 @@ module.exports = function (port) {
   webSocketServer.on('connection', (ws) => {
     ws.send(JSON.stringify({ status: 'serverReady' }))
     console.log(
-      '[Reload Service] Watch mode ready. Waiting for extension...'
+      '\nStarting a new browser instance with your extension set up...\n'
     )
 
     ws.on('error', (error) => {
-      console.log('[Reload Service] Error', error)
+      console.log('Error', error)
     })
 
     ws.on('close', () => {
-      console.log('[Reload Service] Watch mode closed. Exiting...')
+      console.log('Watch mode closed. Exiting...\n')
       webSocketServer.close()
     })
 
@@ -25,14 +25,12 @@ module.exports = function (port) {
       const message = JSON.parse(msg)
 
       if (message.status === 'clientReady') {
-        console.log(
-          '[Reload Service] Extension ready. Watching changes...'
-        )
+        console.log('Browser setup completed! Extension loaded.\n')
       }
 
       if (message.status === 'reloaded') {
         console.log(
-          '[Reload Service] Extension reloaded. Watching changes...'
+          'Extension reloaded. Watching for changeszz...\n'
         )
       }
     })
