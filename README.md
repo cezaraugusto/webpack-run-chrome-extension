@@ -4,23 +4,32 @@
 [npm-url]: https://npmjs.org/package/webpack-run-chrome-extension
 # webpack-run-chrome-extension [![workflow][action-image]][action-url] [![npm][npm-image]][npm-url]
 
-<img src="./logo.png" align=right height=180>
+<img src="https://user-images.githubusercontent.com/4672033/103182804-f2bc9a80-488c-11eb-936d-efa5474e384f.png" align=right height=180>
 
-> Build your extension on Chrome with auto-reload support
+> Run your extension on Chrome with auto-reload support
 
-Opens up a new Chrome instance with an extension loaded. The browser instance accepts all flags Chrome does (see [browserFlags](#browserFlags)) and loads on a clean profile by default. The extension loaded includes default live-reload support.
+Opens up a new Chrome browser window with an extension loaded. This plugin accepts all flags Chrome does (see [browserFlags](#browserFlags)) and loads on a clean profile by default. The browser loads the extension pragmatically in developer mode with live-reload support for JavaScript changes.
 
 ## Highlights
 
-* Zero-config live-reload. The plugin reloads background pages, content scripts, options pages. Everything. (customizable)
-* Fresh profile on every run. Preserve your main profile by using discardable profiles for development (customizable).
-* No need to download Chrome. Uses the system installed Chrome binary (accepts Canary builds).
-* No hanging processes or extra steps to open/close Chrome. Killing the dev server instance kills all opened plugin processes.
+* Zero-config auto-reload. (customizable)
+* Fresh profile with developer mode enabled by default on every run. (customizable)
+* Opens the handy "chrome://extensions" by default for fast debugging.
+* Uses the system browser instead of fully downloading Chrome (!!). (accepts Canary builds)
+* Closing the webpack process instantly kills all child processes. No extra steps to open/close Chrome.
 * Supports [virtually all Chrome flags](https://peter.sh/experiments/chromium-command-line-switches/).
 
-```bash
-yarn add webpack-chrome-extension-launcher -D
+## See it in action
+
 ```
+git clone git@github.com:cezaraugusto/webpack-run-chrome-extension.git
+cd webpack-run-chrome-extension && yarn install
+yarn demo
+```
+
+<p align='center'>
+<img src='https://user-images.githubusercontent.com/4672033/103184014-96f60f80-4894-11eb-8c99-04fb1c5ce086.gif' width='600' alt='npm start'>
+</p>
 
 ## Usage
 
