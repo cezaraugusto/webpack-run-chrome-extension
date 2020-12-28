@@ -1,6 +1,7 @@
 const ChromeLauncher = require('chrome-launcher')
 
 const browserConfig = require('../browser.config')
+const createUserDataDir = require('./createUserDataDir')
 
 process.on('SIGINT', async () => {
   await ChromeLauncher.killAll()
@@ -20,7 +21,7 @@ module.exports = async function (self = {}) {
   const browserConfigOptions = {
     defaultFlags: defaultFlags || [],
     browserFlags: self.browserFlags || [],
-    userDataDir: self.userDataDir,
+    userDataDir: self.userDataDir || await createUserDataDir(),
     startingUrl: self.startingUrl,
     autoReload: self.autoReload || true
   }
