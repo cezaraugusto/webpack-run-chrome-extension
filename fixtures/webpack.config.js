@@ -5,11 +5,11 @@ const OpenChromeExtension = require('../module')
 module.exports = {
   mode: 'development',
   entry: {
-    background: path.resolve(__dirname, './testExtension/src/background.js')
+    background: path.resolve(__dirname, './sampleExtension/src/background.js')
   },
   plugins: [
     new OpenChromeExtension({
-      extensionPath: path.resolve(__dirname, './testExtension')
+      extensionPath: path.resolve(__dirname, './sampleExtension')
     })
   ]
 }
