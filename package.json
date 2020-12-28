@@ -25,7 +25,7 @@
     "module.js",
     "browser.config.js",
     "steps",
-    "extensions"
+    "manager-extension"
   ],
   "keywords": [
     "webpack",
