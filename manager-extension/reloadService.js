@@ -18,9 +18,17 @@ ws.onopen = () => {
 ws.onmessage = async (event) => {
   const message = JSON.parse(event.data)
 
-  if (message.status === 'reloadRequested') {
+  if (message.status === 'extensionReloadRequested') {
     await reloadAllExtensions()
     ws.send(JSON.stringify({ status: 'extensionReloaded' }))
+  }
+
+  if (message.status === 'tabReloadRequested') {
+
+  }
+
+  if (message.status === 'allTabsReloadRequested') {
+
   }
 
   if (message.status === 'extensionReloaded') {
@@ -66,4 +74,20 @@ async function reloadAllExtensions () {
     .map(extension => reloadExtension(extension.id))
 
   await Promise.all(reloadAll)
+}
+
+async function reloadTab () {
+  await new Promise((resolve) => {
+    return chrome.tabs.getCurrent(tab => {
+      chrome.tabs.reload(tab.id)
+    }, resolve)
+  })
+}
+
+async function reloadAllTabs () {
+  await new Promise((resolve) => {
+    return chrome.tabs.query({}, tabs => {
+      tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
+    })
+  })
 }

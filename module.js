@@ -1,9 +1,8 @@
-// Steps
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const startWatchService = require('./steps/startWatchService')
-const resolveManifest = require('./steps/resolveManifest')
+const generateTempEntriesHook = require('./steps/generate-temp-entries/hook')
+const watchFileChangesHook = require('./steps/watch-file-changes/hook')
 const serveExtension = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server
@@ -12,7 +11,7 @@ const serveExtension = require('./steps/serveExtension')
 class RunChromeExtension {
   constructor (options = {}) {
     // User-defined options
-    this.port = options.port
+    this.port = resolvePort(options.port)
     this.extensionPath = options.extensionPath
     this.browserFlags = options.browserFlags
     this.userDataDir = options.userDataDir
@@ -24,24 +23,23 @@ class RunChromeExtension {
     // We don't need to watch anything on production
     if (compiler.options.mode === 'production') return
 
-    const port = resolvePort(this.port)
-
-    const wss = serveSocket(port)
+    // Kickoff server
+    const wss = serveSocket(this.port)
 
     // Generate the reload extension on the fly since
     // we can't tell what port is available before runtime.
-    generateReloadExtension(port)
-
-    compiler.hooks.watchRun.tapAsync(
-      'open-chrome-extension',
-      (compilation, done) => {
-        const extensionPath = resolveManifest(this.extensionPath)
-        const changedFiles = compilation.modifiedFiles || new Map()
-
-        startWatchService(wss, extensionPath, changedFiles)
-        done()
-      })
-
+    generateReloadExtension(this.port)
+    // Get relevant fields from package.json and transform
+    // them into webpack entries
+    generateTempEntriesHook(compiler, this.extensionPath)
+    // Actually watch changes. This will trigger different
+    // reload strategies based on the manifest field the
+    // file is included. See the method itself for info.
+    watchFileChangesHook(compiler, wss, this.extensionPath)
+    // Serve the extension to the browser. At this point
+    // the manager extension setup and the client extension
+    // with key files being watched.
+    // Now we inject these two extensions into the browser.
     serveExtension(this)
   }
 }

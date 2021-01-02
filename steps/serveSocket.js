@@ -33,6 +33,18 @@ module.exports = function (port) {
           'Extension reloaded. Watching for changes...\n'
         )
       }
+
+      if (message.status === 'tabReloaded') {
+        // Console.log(
+        //   'Extension tab reloaded. Watching for changes...\n'
+        // )
+      }
+
+      if (message.status === 'allTabsReloaded') {
+        // Console.log(
+        //   'Extension reloaded. Watching for changes...\n'
+        // )
+      }
     })
   })
 
