@@ -33,7 +33,7 @@ class RunChromeExtension {
     generateReloadExtension(port)
 
     compiler.hooks.afterEmit.tapAsync('open-chrome-extension', (_, done) => {
-      broadcastSocketMessage(wss, { status: 'reloadRequested' })
+      broadcastSocketMessage(wss, { status: 'extensionReloadRequested' })
       done()
     })
 
