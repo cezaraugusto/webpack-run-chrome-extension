@@ -1,9 +1,9 @@
-
 // Steps
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const broadcastSocketMessage = require('./steps/broadcastSocketMessage')
+const startWatchService = require('./steps/startWatchService')
+const resolveManifest = require('./steps/resolveManifest')
 const serveExtension = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server
@@ -32,10 +32,15 @@ class RunChromeExtension {
     // we can't tell what port is available before runtime.
     generateReloadExtension(port)
 
-    compiler.hooks.afterEmit.tapAsync('open-chrome-extension', (_, done) => {
-      broadcastSocketMessage(wss, { status: 'extensionReloadRequested' })
-      done()
-    })
+    compiler.hooks.watchRun.tapAsync(
+      'open-chrome-extension',
+      (compilation, done) => {
+        const extensionPath = resolveManifest(this.extensionPath)
+        const changedFiles = compilation.modifiedFiles || new Map()
+
+        startWatchService(wss, extensionPath, changedFiles)
+        done()
+      })
 
     serveExtension(this)
   }

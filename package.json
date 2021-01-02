@@ -51,6 +51,7 @@
   "dependencies": {
     "chrome-launcher": "^0.13.4",
     "fs-extra": "^9.0.1",
+    "log-md": "^0.2.0",
     "mock-socket": "^9.0.3",
     "webpack": "^5.9.0",
     "webpack-cli": "^4.2.0",
