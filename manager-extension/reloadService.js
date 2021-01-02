@@ -20,10 +20,10 @@ ws.onmessage = async (event) => {
 
   if (message.status === 'reloadRequested') {
     await reloadAllExtensions()
-    ws.send(JSON.stringify({ status: 'reloaded' }))
+    ws.send(JSON.stringify({ status: 'extensionReloaded' }))
   }
 
-  if (message.status === 'reloaded') {
+  if (message.status === 'extensionReloaded') {
     console.log(
       '[Reload Service] Extension reloaded. Watching changes...'
     )

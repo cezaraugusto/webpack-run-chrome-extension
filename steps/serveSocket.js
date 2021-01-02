@@ -28,9 +28,9 @@ module.exports = function (port) {
         console.log('Browser setup completed! Extension loaded.\n')
       }
 
-      if (message.status === 'reloaded') {
+      if (message.status === 'extensionReloaded') {
         console.log(
-          'Extension reloaded. Watching for changeszz...\n'
+          'Extension reloaded. Watching for changes...\n'
         )
       }
     })
