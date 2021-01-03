@@ -5,17 +5,17 @@
   "default_locale": "en",
 	"description": "A demo extension",
 	"icons": {
-		"16": "images/icon/test_16.png",
-		"32": "images/icon/test_32.png",
-		"48": "images/icon/test_48.png",
-		"64": "images/icon/test_64.png"
+		"16": "public/icon/test_16.png",
+		"32": "public/icon/test_32.png",
+		"48": "public/icon/test_48.png",
+		"64": "public/icon/test_64.png"
 	},
   "browser_action": {
 		"default_icon": {
-			"16": "images/icon/test_16.png",
-			"32": "images/icon/test_32.png",
-			"48": "images/icon/test_48.png",
-			"64": "images/icon/test_64.png"
+			"16": "public/icon/test_16.png",
+			"32": "public/icon/test_32.png",
+			"48": "public/icon/test_48.png",
+			"64": "public/icon/test_64.png"
 		},
 		"default_title": "Test",
 		"default_popup": "popup/popup.html"
@@ -81,6 +81,6 @@
   "short_name": "Short Name",
   "version_name": "",
 	"web_accessible_resources": [
-		"images/*"
+		"resources/*"
   ]
 }
