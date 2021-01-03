@@ -23,12 +23,13 @@
   "author": "Cezar Augusto",
   "background": {
 		"scripts": [
-			"background/background.js"
+			"background/background.js",
+			"background/command.js"
 		],
     "persistent": false
   },
   "chrome_url_overrides": {
-    "newtab": "./custom/custom.html"
+    "newtab": "custom/custom.html"
   },
   "commands": {
     "toggle-feature": {
@@ -51,10 +52,12 @@
 				"<all_urls>"
 			],
 			"js": [
-				"content/content.js"
+				"content/content1.js",
+				"content/content2.js"
 			],
 			"css": [
-				"content/content.css"
+				"content/content1.css",
+				"content/content2.css"
 			],
 			"run_at": "document_start"
 		}
@@ -64,7 +67,7 @@
   "externally_connectable": {
     "matches": ["*://*.example.com/*"]
   },
-  
+
   "homepage_url": "https://github.com/cezaraugusto/demo-extension",
   "incognito": "not_allowed",
   "omnibox": {

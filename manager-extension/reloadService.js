@@ -23,13 +23,13 @@ ws.onmessage = async (event) => {
     ws.send(JSON.stringify({ status: 'extensionReloaded' }))
   }
 
-  if (message.status === 'tabReloadRequested') {
+  // If (message.status === 'tabReloadRequested') {
+  //  TODO
+  // }
 
-  }
-
-  if (message.status === 'allTabsReloadRequested') {
-
-  }
+  // if (message.status === 'allTabsReloadRequested') {
+  //  TODO
+  // }
 
   if (message.status === 'extensionReloaded') {
     console.log(
@@ -76,18 +76,18 @@ async function reloadAllExtensions () {
   await Promise.all(reloadAll)
 }
 
-async function reloadTab () {
-  await new Promise((resolve) => {
-    return chrome.tabs.getCurrent(tab => {
-      chrome.tabs.reload(tab.id)
-    }, resolve)
-  })
-}
+// Async function reloadTab () {
+//   await new Promise((resolve) => {
+//     return chrome.tabs.getCurrent(tab => {
+//       chrome.tabs.reload(tab.id)
+//     }, resolve)
+//   })
+// }
 
-async function reloadAllTabs () {
-  await new Promise((resolve) => {
-    return chrome.tabs.query({}, tabs => {
-      tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
-    })
-  })
-}
+// async function reloadAllTabs () {
+//   await new Promise((resolve) => {
+//     return chrome.tabs.query({}, tabs => {
+//       tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
+//     })
+//   })
+// }
