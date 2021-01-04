@@ -1,1 +1,1 @@
-console.log('content script loaded')
+console.log('content script2 loaded')

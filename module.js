@@ -1,3 +1,6 @@
+
+
+
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
@@ -31,6 +34,7 @@ class RunChromeExtension {
     generateReloadExtension(this.port)
     // Get relevant fields from package.json and transform
     // them into webpack entries
+
     // generateTempEntriesHook(compiler, this.extensionPath)
     // Actually watch changes. This will trigger different
     // reload strategies based on the manifest field the
