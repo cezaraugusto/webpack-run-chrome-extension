@@ -34,8 +34,7 @@ class RunChromeExtension {
     generateReloadExtension(this.port)
     // Get relevant fields from package.json and transform
     // them into webpack entries
-
-    // generateTempEntriesHook(compiler, this.extensionPath)
+    generateTempEntriesHook(compiler, this.extensionPath)
     // Actually watch changes. This will trigger different
     // reload strategies based on the manifest field the
     // file is included. See the method itself for info.

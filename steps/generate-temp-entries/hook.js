@@ -1,22 +1,27 @@
 const resolveManifest = require('../resolveManifest')
+const backgroundScriptEntry = require('./generateEntries/backgroundScript')
 
 module.exports = function (compiler, extensionPath) {
   const manifestPath = resolveManifest(extensionPath)
-  const manifest = require(manifestPath)
 
-  // console.log('manifest in generate-temp-entries', manifest)
+  let cachedEntry
 
   return compiler.hooks.entryOption.tap(
     'open-chrome-extension',
     (context, entry) => {
-      // compiler.options.entry = {
-      // // These are user-defined entries
-      //   ...entry
-      // }
-      console.log(compiler.options.entry)
-      // Compiler.hooks.entryOption.call(context, newLoaderPath)
+      const newEntry = {
+        ...entry,
+        ...backgroundScriptEntry(manifestPath),
+      }
 
-      return true
+      const { stringify } = JSON
+      if (stringify(newEntry) === stringify(cachedEntry)) {
+        return
+      }
+
+      compiler.options.entry = cachedEntry = newEntry
+
+      compiler.hooks.entryOption.call(context, newEntry)
     }
   )
 }
