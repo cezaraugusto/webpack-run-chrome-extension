@@ -33,21 +33,9 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
 		new HtmlWebpackPlugin({
-      filename: './dist/options/options.html',
-      chunks: ['options'],
-      template: path.resolve(__dirname, './demo-extension/options/options.html'),
-      inject: false
-    }),
-		new HtmlWebpackPlugin({
       filename: './dist/custom/custom.html',
       chunks: ['custom'],
       template: path.resolve(__dirname, './demo-extension/custom/custom.html'),
-      inject: false
-    }),
-		new HtmlWebpackPlugin({
-      filename: './dist/background/background.html',
-      chunks: ['background'],
-      template: path.resolve(__dirname, './demo-extension/background/background.html'),
       inject: false
     }),
     // Allows watching changes in CSS files for content scripts
