@@ -1,5 +1,6 @@
 const resolveManifest = require('../resolveManifest')
 const backgroundScriptEntry = require('./generateEntries/backgroundScript')
+const contentScriptEntry = require('./generateEntries/contentScript')
 
 module.exports = function (compiler, extensionPath) {
   const manifestPath = resolveManifest(extensionPath)
@@ -12,6 +13,7 @@ module.exports = function (compiler, extensionPath) {
       const newEntry = {
         ...entry,
         ...backgroundScriptEntry(manifestPath),
+        ...contentScriptEntry(manifestPath),
       }
 
       const { stringify } = JSON

@@ -15,10 +15,6 @@ module.exports = {
     watchContentBase: true
   },
   entry: {
-    content: [
-      path.resolve(__dirname, './demo-extension/content/content1.js'),
-      path.resolve(__dirname, './demo-extension/content/content2.js')
-    ],
     options: [
       path.resolve(__dirname, './demo-extension/options/options1.js'),
       path.resolve(__dirname, './demo-extension/options/options2.js'),
