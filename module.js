@@ -4,7 +4,8 @@
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const generateTempEntriesHook = require('./steps/generate-temp-entries/hook')
+const generateManifestEntriesHook =
+  require('./steps/generate-manifest-entries/hook')
 const watchFileChangesHook = require('./steps/watch-file-changes/hook')
 const serveExtension = require('./steps/serveExtension')
 
@@ -34,7 +35,7 @@ class RunChromeExtension {
     generateReloadExtension(this.port)
     // Get relevant fields from package.json and transform
     // them into webpack entries
-    generateTempEntriesHook(compiler, this.extensionPath)
+    generateManifestEntriesHook(compiler, this.extensionPath)
     // Actually watch changes. This will trigger different
     // reload strategies based on the manifest field the
     // file is included. See the method itself for info.

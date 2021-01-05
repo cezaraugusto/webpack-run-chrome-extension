@@ -19,10 +19,6 @@ module.exports = {
       path.resolve(__dirname, './demo-extension/options/options1.js'),
       path.resolve(__dirname, './demo-extension/options/options2.js'),
     ],
-    popup: [
-      path.resolve(__dirname, './demo-extension/popup/popup1.js'),
-      path.resolve(__dirname, './demo-extension/popup/popup2.js')
-    ],
     custom: [
       path.resolve(__dirname, './demo-extension/custom/custom1.js'),
       path.resolve(__dirname, './demo-extension/custom/custom2.js')
@@ -36,12 +32,6 @@ module.exports = {
       extensionPath: path.resolve(__dirname, './demo-extension')
     }),
     new MiniCssExtractPlugin(),
-		new HtmlWebpackPlugin({
-      filename: './dist/popup/popup.html',
-      chunks: ['popup'],
-      template: path.resolve(__dirname, './demo-extension/popup/popup.html'),
-      inject: false
-    }),
 		new HtmlWebpackPlugin({
       filename: './dist/options/options.html',
       chunks: ['options'],

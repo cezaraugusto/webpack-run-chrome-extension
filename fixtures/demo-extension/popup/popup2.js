@@ -1,1 +1,1 @@
-console.log('popup script loadedwww2w')
+console.log('popup script loaded')

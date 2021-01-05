@@ -1,6 +1,7 @@
 const resolveManifest = require('../resolveManifest')
 const backgroundScriptEntry = require('./scriptEntries/backgroundScript')
 const contentScriptEntry = require('./scriptEntries/contentScript')
+const popupHTMLEntry = require('./htmlEntries/popup')
 
 module.exports = function (compiler, extensionPath) {
   const manifestPath = resolveManifest(extensionPath)
@@ -24,6 +25,8 @@ module.exports = function (compiler, extensionPath) {
       compiler.options.entry = cachedEntry = newEntry
 
       compiler.hooks.entryOption.call(context, newEntry)
+
+      popupHTMLEntry(manifestPath)
     }
   )
 }

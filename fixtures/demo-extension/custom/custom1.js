@@ -1,1 +1,1 @@
-console.log('custom script loaded!')
+console.log('custom script loaded')
