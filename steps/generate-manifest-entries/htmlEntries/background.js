@@ -19,7 +19,7 @@ module.exports = function (manifestPath) {
     // but since we need to declare a filename, at least
     // the path is a real temp path
     filename: path.join(os.tmpdir(), background),
-    chunks: [background.toString()],
+    chunks: ['background'],
     template: background,
     inject: false
   })

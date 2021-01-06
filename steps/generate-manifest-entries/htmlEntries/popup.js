@@ -20,7 +20,7 @@ module.exports = function (manifestPath) {
     // the path is a real temp path
     filename: path.join(os.tmpdir(), popup),
     // TODO
-    chunks: [popup.toString()],
+    chunks: ['popup'],
     template: popup,
     inject: false
   })

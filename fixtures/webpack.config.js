@@ -15,9 +15,9 @@ module.exports = {
     watchContentBase: true
   },
   entry: {
-    options: [
-      path.resolve(__dirname, './demo-extension/options/options1.js'),
-      path.resolve(__dirname, './demo-extension/options/options2.js'),
+    devtools: [
+      path.resolve(__dirname, './demo-extension/devtools/sidebar.js'),
+      path.resolve(__dirname, './demo-extension/devtools/devtools.js'),
     ],
     custom: [
       path.resolve(__dirname, './demo-extension/custom/custom1.js'),
@@ -38,6 +38,12 @@ module.exports = {
       template: path.resolve(__dirname, './demo-extension/custom/custom.html'),
       inject: false
     }),
+		// new HtmlWebpackPlugin({
+    //   filename: './dist/devtools/devtools.html',
+    //   chunks: ['devtools'],
+    //   template: path.resolve(__dirname, './demo-extension/devtools/devtools.html'),
+    //   inject: false
+    // }),
     // Allows watching changes in CSS files for content scripts
     // and the public path.
     // You can get the original source filename from Asset Objects.
@@ -64,6 +70,10 @@ module.exports = {
         {
           from: path.resolve(__dirname, './demo-extension/custom/custom.css'),
           to: './dist/custom'
+        },
+        {
+          from: path.resolve(__dirname, './demo-extension/devtools/devtools.css'),
+          to: './dist/devtools'
         }
       ]
     })
