@@ -3,7 +3,7 @@ const os = require('os')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = function (manifestPath) {
+module.exports = function (compiler, manifestPath) {
   const manifest = require(manifestPath)
 
   if (
@@ -21,7 +21,7 @@ module.exports = function (manifestPath) {
     filename: path.join(os.tmpdir(), popup),
     // TODO
     chunks: ['popup'],
-    template: popup,
+    template: path.resolve(path.dirname(manifestPath), popup),
     inject: false
-  })
+  }).apply(compiler)
 }

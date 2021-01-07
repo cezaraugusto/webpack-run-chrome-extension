@@ -5,6 +5,7 @@ const popupHTMLEntry = require('./htmlEntries/popup')
 const optionsHTMLEntry = require('./htmlEntries/options')
 const backgroundHTMLEntry = require('./htmlEntries/background')
 const devtoolsHTMLEntry = require('./htmlEntries/devtools')
+const manifestEntry = require('./assetEntries/manifest')
 
 module.exports = function (compiler, extensionPath) {
   const manifestPath = resolveManifest(extensionPath)
@@ -29,10 +30,12 @@ module.exports = function (compiler, extensionPath) {
 
       compiler.hooks.entryOption.call(context, newEntry)
 
-      popupHTMLEntry(manifestPath)
+      popupHTMLEntry(compiler, manifestPath)
       optionsHTMLEntry(manifestPath)
       backgroundHTMLEntry(manifestPath)
       devtoolsHTMLEntry(manifestPath)
+
+      manifestEntry(manifestPath)
     }
   )
 }
