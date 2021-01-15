@@ -31,6 +31,8 @@ module.exports = function (compiler, extensionPath) {
       compiler.hooks.entryOption.call(context, newEntry)
 
       popupHTMLEntry(compiler, manifestPath)
+      optionsHTMLEntry(compiler, manifestPath)
+      // backgroundHTMLEntry(manifestPath)
       devtoolsHTMLEntry(compiler, manifestPath)
 
       manifestEntry(manifestPath)
