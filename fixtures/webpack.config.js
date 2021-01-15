@@ -38,12 +38,6 @@ module.exports = {
       template: path.resolve(__dirname, './demo-extension/custom/custom.html'),
       inject: false
     }),
-		// new HtmlWebpackPlugin({
-    //   filename: './dist/devtools/devtools.html',
-    //   chunks: ['devtools'],
-    //   template: path.resolve(__dirname, './demo-extension/devtools/devtools.html'),
-    //   inject: false
-    // }),
     // Allows watching changes in CSS files for content scripts
     // and the public path.
     // You can get the original source filename from Asset Objects.

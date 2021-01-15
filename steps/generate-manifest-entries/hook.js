@@ -5,6 +5,7 @@ const popupHTMLEntry = require('./htmlEntries/popup')
 const optionsHTMLEntry = require('./htmlEntries/options')
 const backgroundHTMLEntry = require('./htmlEntries/background')
 const devtoolsHTMLEntry = require('./htmlEntries/devtools')
+const newtabOverrideHTMLEntry = require('./htmlEntries/newtabOverride')
 const manifestEntry = require('./assetEntries/manifest')
 
 module.exports = function (compiler, extensionPath) {
@@ -34,7 +35,7 @@ module.exports = function (compiler, extensionPath) {
       optionsHTMLEntry(compiler, manifestPath)
       // backgroundHTMLEntry(manifestPath)
       devtoolsHTMLEntry(compiler, manifestPath)
-
+      newtabOverrideHTMLEntry(compiler, manifestPath)
       manifestEntry(manifestPath)
     }
   )
