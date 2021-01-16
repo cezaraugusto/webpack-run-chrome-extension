@@ -34,7 +34,7 @@ module.exports = function (compiler, extensionPath) {
 
       popupHTMLEntry(compiler, manifestPath)
       optionsHTMLEntry(compiler, manifestPath)
-      // backgroundHTMLEntry(manifestPath)
+      backgroundHTMLEntry(compiler, manifestPath)
       devtoolsHTMLEntry(compiler, manifestPath)
       newtabOverrideHTMLEntry(compiler, manifestPath)
       historyOverrideHTMLEntry(compiler, manifestPath)
