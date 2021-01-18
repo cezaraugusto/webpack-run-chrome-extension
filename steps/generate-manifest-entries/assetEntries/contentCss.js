@@ -7,7 +7,7 @@ module.exports = async function (manifestPath) {
     !manifest ||
     !manifest.content_scripts ||
     !manifest.content_scripts[0].css
-  ) return {}
+  ) return []
 
   const contentCss = manifest.content_scripts[0].css
 

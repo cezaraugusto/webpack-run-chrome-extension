@@ -2,9 +2,9 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const resolveManifest = require('../../resolveManifest')
 const backgroundCSSEntry = require('./backgroundCss')
-// const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
-// const contentCSSEntry = require('./contentCss')
-// const devtoolsCSSEntry = require('./devtoolsCss')
+const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
+const contentCSSEntry = require('./contentCss')
+const devtoolsCSSEntry = require('./devtoolsCss')
 // const historyOverrideCSSEntry = require('./historyOverrideCss')
 // const localesEntry = require('./locales')
 // const manifestEntry = require('./manifest')
@@ -20,9 +20,9 @@ module.exports = function (compiler, extensionPath) {
     'open-chrome-extension',
     async (compiler, done) => {
       const backgroundCss = await backgroundCSSEntry(manifestPath)
-      // const bookmarksOverrideCSS = await bookmarksOverrideCSSEntry(manifestPath)
-      // const contentCSS = await contentCSSEntry(manifestPath)
-      // const devtoolsCSS = await devtoolsCSSEntry(manifestPath)
+      const bookmarksOverrideCSS = await bookmarksOverrideCSSEntry(manifestPath)
+      const contentCSS = await contentCSSEntry(manifestPath)
+      const devtoolsCSS = await devtoolsCSSEntry(manifestPath)
       // const historyOverrideCSS = await historyOverrideCSSEntry(manifestPath)
       // const locales = await localesEntry(manifestPath)
       // const manifest = await manifestEntry(manifestPath)
@@ -34,9 +34,9 @@ module.exports = function (compiler, extensionPath) {
       new CopyPlugin({
         patterns: [
           ...backgroundCss,
-          // ...bookmarksOverrideCSS,
-          // ...contentCSS,
-          // ...devtoolsCSS,
+          ...bookmarksOverrideCSS,
+          ...contentCSS,
+          ...devtoolsCSS,
           // ...historyOverrideCSS,
           // ...locales,
           // ...manifest,

@@ -10,7 +10,7 @@ module.exports = async function (manifestPath) {
     !manifest ||
     !manifest.chrome_url_overrides ||
     !manifest.chrome_url_overrides.bookmarks
-  ) return {}
+  ) return []
 
   const bookmarksOverride = path.resolve(
     path.dirname(manifestPath),

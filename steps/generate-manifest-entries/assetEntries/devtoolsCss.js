@@ -12,7 +12,7 @@ module.exports = async function (manifestPath) {
   if (
     !manifest ||
     !manifest.devtools_page
-  ) return {}
+  ) return []
 
   const devtools = path.resolve(
     path.dirname(manifestPath),

@@ -10,7 +10,7 @@ module.exports = async function (manifestPath) {
     !manifest ||
     !manifest.background ||
     !manifest.background.page
-  ) return {}
+  ) return []
 
   const backgroundPage = path.resolve(
     path.dirname(manifestPath),
