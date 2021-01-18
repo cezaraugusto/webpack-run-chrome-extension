@@ -1,16 +1,16 @@
 const CopyPlugin = require('copy-webpack-plugin')
 
 const resolveManifest = require('../../resolveManifest')
-const backgroundCSSEntry = require('./backgroundCss')
-const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
-const contentCSSEntry = require('./contentCss')
-const devtoolsCSSEntry = require('./devtoolsCss')
-// const historyOverrideCSSEntry = require('./historyOverrideCss')
+const backgroundCssEntry = require('./backgroundCss')
+const bookmarksOverrideCssEntry = require('./bookmarksOverrideCss')
+const contentCssEntry = require('./contentCss')
+const devtoolsCssEntry = require('./devtoolsCss')
+const historyOverrideCssEntry = require('./historyOverrideCss')
 // const localesEntry = require('./locales')
 // const manifestEntry = require('./manifest')
-// const newtabOverrideCSSEntry = require('./newtabOverrideCss')
-// const optionsCSSEntry = require('./optionsCss')
-// const popupCSSEntry = require('./popupCss')
+// const newtabOverrideCssEntry = require('./newtabOverrideCss')
+// const optionsCssEntry = require('./optionsCss')
+// const popupCssEntry = require('./popupCss')
 // const webAccessibleResourcesEntry = require('./webAccessibleResources')
 
 module.exports = function (compiler, extensionPath) {
@@ -19,31 +19,31 @@ module.exports = function (compiler, extensionPath) {
   return compiler.hooks.watchRun.tapAsync(
     'open-chrome-extension',
     async (compiler, done) => {
-      const backgroundCss = await backgroundCSSEntry(manifestPath)
-      const bookmarksOverrideCSS = await bookmarksOverrideCSSEntry(manifestPath)
-      const contentCSS = await contentCSSEntry(manifestPath)
-      const devtoolsCSS = await devtoolsCSSEntry(manifestPath)
-      // const historyOverrideCSS = await historyOverrideCSSEntry(manifestPath)
+      const backgroundCss = await backgroundCssEntry(manifestPath)
+      const bookmarksOverrideCss = await bookmarksOverrideCssEntry(manifestPath)
+      const contentCss = await contentCssEntry(manifestPath)
+      const devtoolsCss = await devtoolsCssEntry(manifestPath)
+      const historyOverrideCss = await historyOverrideCssEntry(manifestPath)
       // const locales = await localesEntry(manifestPath)
       // const manifest = await manifestEntry(manifestPath)
-      // const newtabOverrideCSS = await newtabOverrideCSSEntry(manifestPath)
-      // const optionsCSS = await optionsCSSEntry(manifestPath)
-      // const popupCSS = await popupCSSEntry(manifestPath)
-      // const webAccessibleResourcesCSS = await webAccessibleResourcesCSSEntry(manifestPath)
+      // const newtabOverrideCss = await newtabOverrideCssEntry(manifestPath)
+      // const optionsCss = await optionsCssEntry(manifestPath)
+      // const popupCss = await popupCssEntry(manifestPath)
+      // const webAccessibleResourcesCss = await webAccessibleResourcesCssEntry(manifestPath)
 
       new CopyPlugin({
         patterns: [
           ...backgroundCss,
-          ...bookmarksOverrideCSS,
-          ...contentCSS,
-          ...devtoolsCSS,
-          // ...historyOverrideCSS,
+          ...bookmarksOverrideCss,
+          ...contentCss,
+          ...devtoolsCss,
+          ...historyOverrideCss,
           // ...locales,
           // ...manifest,
-          // ...newtabOverrideCSS,
-          // ...optionsCSS,
-          // ...popupCSS,
-          // ...webAccessibleResourcesCSS
+          // ...newtabOverrideCss,
+          // ...optionsCss,
+          // ...popupCss,
+          // ...webAccessibleResourcesCss
         ]
       }).apply(compiler)
       done()
