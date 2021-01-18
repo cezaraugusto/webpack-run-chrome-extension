@@ -1,3 +1,5 @@
+/* global chrome */
+
 function handleShown () {
   console.log('panel visible')
 }
@@ -9,7 +11,9 @@ function handleHidden () {
 chrome.devtools.panels.create(
   'Extension Panel',
   'public/icon/test_32.png',
-  'devtools/devtools.html', newPanel => {
-  newPanel.onShown.addListener(handleShown)
-  newPanel.onHidden.addListener(handleHidden)
-})
+  'devtools/devtools.html',
+  newPanel => {
+    newPanel.onShown.addListener(handleShown)
+    newPanel.onHidden.addListener(handleHidden)
+  }
+)

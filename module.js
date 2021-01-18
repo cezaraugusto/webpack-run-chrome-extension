@@ -1,15 +1,14 @@
-
-
-
 const resolvePort = require('./steps/resolvePort')
-const serveSocket = require('./steps/serveSocket')
-const generateReloadExtension = require('./steps/generateReloadExtension')
-const generateJSEntriesHook =
-  require('./steps/generate-manifest-entries/scriptEntries/hook')
-const generateHTMLEntriesHook =
-  require('./steps/generate-manifest-entries/htmlEntries/hook')
-const watchFileChangesHook = require('./steps/watch-file-changes/hook')
-const serveExtension = require('./steps/serveExtension')
+// Const serveSocket = require('./steps/serveSocket')
+// const generateReloadExtension = require('./steps/generateReloadExtension')
+// const generateJSEntriesHook =
+//   require('./steps/generate-manifest-entries/scriptEntries/hook')
+// const generateHTMLEntriesHook =
+//   require('./steps/generate-manifest-entries/htmlEntries/hook')
+const generateAssetEntriesHook =
+  require('./steps/generate-manifest-entries/assetEntries/hook')
+// Const watchFileChangesHook = require('./steps/watch-file-changes/hook')
+// const serveExtension = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server
 // watched by webpack that connects to an extension
@@ -30,29 +29,29 @@ class RunChromeExtension {
     if (compiler.options.mode === 'production') return
 
     // Kickoff server
-    const wss = serveSocket(this.port)
+    // const wss = serveSocket(this.port)
 
     // Generate the reload extension on the fly since
     // we can't tell what port is available before runtime.
-    generateReloadExtension(this.port)
+    // generateReloadExtension(this.port)
     // Get relevant HTML fields from package.json
     // and transform them into webpack entries
-    generateJSEntriesHook(compiler, this.extensionPath)
+    // generateJSEntriesHook(compiler, this.extensionPath)
     // Get relevant HTML fields from package.json
     // and transform them into webpack entries
-    generateHTMLEntriesHook(compiler, this.extensionPath)
+    // generateHTMLEntriesHook(compiler, this.extensionPath)
     // Get relevant HTML fields from package.json
     // and transform them into webpack entries
-    // generateAssetEntriesHook(compiler, this.extensionPath)
+    generateAssetEntriesHook(compiler, this.extensionPath)
     // Actually watch changes. This will trigger different
     // reload strategies based on the manifest field the
     // file is included. See the method itself for info.
-    watchFileChangesHook(compiler, wss, this.extensionPath)
+    // watchFileChangesHook(compiler, wss, this.extensionPath)
     // Serve the extension to the browser. At this point
     // the manager extension setup and the client extension
     // with key files being watched.
     // Now we inject these two extensions into the browser.
-    serveExtension(this)
+    // serveExtension(this)
   }
 }
 
