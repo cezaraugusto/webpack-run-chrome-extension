@@ -10,7 +10,7 @@ const historyOverrideCssEntry = require('./historyOverrideCss')
 // const manifestEntry = require('./manifest')
 const newtabOverrideCssEntry = require('./newtabOverrideCss')
 const optionsCssEntry = require('./optionsCss')
-// const popupCssEntry = require('./popupCss')
+const popupCssEntry = require('./popupCss')
 // const webAccessibleResourcesEntry = require('./webAccessibleResources')
 
 module.exports = function (compiler, extensionPath) {
@@ -28,8 +28,8 @@ module.exports = function (compiler, extensionPath) {
       // const manifest = await manifestEntry(manifestPath)
       const newtabOverrideCss = await newtabOverrideCssEntry(manifestPath)
       const optionsCss = await optionsCssEntry(manifestPath)
-      // const popupCss = await popupCssEntry(manifestPath)
-      // const webAccessibleResourcesCss = await webAccessibleResourcesCssEntry(manifestPath)
+      const popupCss = await popupCssEntry(manifestPath)
+      // const webAccessibleResources = await webAccessibleResources(manifestPath)
 
       new CopyPlugin({
         patterns: [
@@ -42,8 +42,8 @@ module.exports = function (compiler, extensionPath) {
           // ...manifest,
           ...newtabOverrideCss,
           ...optionsCss,
-          // ...popupCss,
-          // ...webAccessibleResourcesCss
+          ...popupCss,
+          // ...webAccessibleResources
         ]
       }).apply(compiler)
       done()
