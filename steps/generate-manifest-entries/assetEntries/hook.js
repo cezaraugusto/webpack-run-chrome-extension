@@ -2,7 +2,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const resolveManifest = require('../../resolveManifest')
 const backgroundCSSEntry = require('./backgroundCss')
-// Const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
+const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
 // const contentCSSEntry = require('./contentCss')
 // const devtoolsCSSEntry = require('./devtoolsCss')
 // const historyOverrideCSSEntry = require('./historyOverrideCss')
@@ -21,8 +21,8 @@ module.exports = function (compiler, extensionPath) {
     async (compilation, done) => {
       new CopyPlugin({
         patterns: [
-          ...await backgroundCSSEntry(manifestPath)
-          // ...await bookmarksOverrideCSSEntry(manifestPath),
+          ...await backgroundCSSEntry(manifestPath),
+          ...await bookmarksOverrideCSSEntry(manifestPath),
           // ...await contentCSSEntry(manifestPath),
           // ...await devtoolsCSSEntry(manifestPath),
           // ...await historyOverrideCSSEntry(manifestPath),
