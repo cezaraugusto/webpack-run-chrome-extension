@@ -8,11 +8,11 @@ module.exports = function (compiler, manifestPath) {
 
   if (
     !manifest ||
-    !manifest['options_ui'] ||
-    !manifest['options_ui'].page
+    !manifest.options_ui ||
+    !manifest.options_ui.page
   ) return {}
 
-  const options = manifest['options_ui'].page
+  const options = manifest.options_ui.page
 
   new HtmlWebpackPlugin({
     // This is a virtual space and doesn't create any folder,

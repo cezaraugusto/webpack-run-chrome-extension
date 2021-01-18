@@ -8,10 +8,10 @@ module.exports = function (compiler, manifestPath) {
 
   if (
     !manifest ||
-    !manifest['devtools_page']
+    !manifest.devtools_page
   ) return {}
 
-  const devtools = manifest['devtools_page']
+  const devtools = manifest.devtools_page
 
   new HtmlWebpackPlugin({
     // This is a virtual space and doesn't create any folder,

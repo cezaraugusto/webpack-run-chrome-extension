@@ -17,5 +17,6 @@ module.exports = function (compiler, extensionPath) {
       devtoolsHTMLEntry(compiler, manifestPath)
       newtabOverrideHTMLEntry(compiler, manifestPath)
       historyOverrideHTMLEntry(compiler, manifestPath)
-    })
+    }
+  )
 }

@@ -5,11 +5,11 @@ module.exports = function (manifestPath) {
 
   if (
     !manifest ||
-    !manifest['content_scripts'] ||
-    !manifest['content_scripts'][0].js
+    !manifest.content_scripts ||
+    !manifest.content_scripts[0].js
   ) return {}
 
-  const scripts = manifest['content_scripts'][0].js
+  const scripts = manifest.content_scripts[0].js
 
   return {
     content: {

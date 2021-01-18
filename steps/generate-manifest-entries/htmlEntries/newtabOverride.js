@@ -8,11 +8,11 @@ module.exports = function (compiler, manifestPath) {
 
   if (
     !manifest ||
-    !manifest['chrome_url_overrides'] ||
-    !manifest['chrome_url_overrides'].newtab
+    !manifest.chrome_url_overrides ||
+    !manifest.chrome_url_overrides.newtab
   ) return {}
 
-  const newtab = manifest['chrome_url_overrides'].newtab
+  const newtab = manifest.chrome_url_overrides.newtab
 
   new HtmlWebpackPlugin({
     // This is a virtual space and doesn't create any folder,

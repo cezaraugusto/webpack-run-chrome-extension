@@ -1,6 +1,6 @@
 const resolveManifest = require('../../resolveManifest')
-const backgroundScriptEntry = require('../scriptEntries/backgroundScript')
-const contentScriptEntry = require('../scriptEntries/contentScript')
+const backgroundScriptEntry = require('./backgroundScript')
+const contentScriptEntry = require('./contentScript')
 
 module.exports = function (compiler, extensionPath) {
   const manifestPath = resolveManifest(extensionPath)
@@ -17,10 +17,12 @@ module.exports = function (compiler, extensionPath) {
       }
 
       const { stringify } = JSON
+
       if (stringify(newEntry) === stringify(cachedEntry)) {
         return
       }
 
+      /* eslint-disable no-multi-assign */
       compiler.options.entry = cachedEntry = newEntry
 
       compiler.hooks.entryOption.call(context, newEntry)

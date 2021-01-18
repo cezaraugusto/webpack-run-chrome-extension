@@ -8,11 +8,11 @@ module.exports = function (compiler, manifestPath) {
 
   if (
     !manifest ||
-    !manifest['browser_action'] ||
-    !manifest['browser_action']['default_popup']
+    !manifest.browser_action ||
+    !manifest.browser_action.default_popup
   ) return {}
 
-  const popup = manifest['browser_action']['default_popup']
+  const popup = manifest.browser_action.default_popup
 
   new HtmlWebpackPlugin({
     // This is a virtual space and doesn't create any folder,
