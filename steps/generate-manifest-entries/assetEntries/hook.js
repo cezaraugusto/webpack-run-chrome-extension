@@ -9,7 +9,7 @@ const historyOverrideCssEntry = require('./historyOverrideCss')
 // const localesEntry = require('./locales')
 // const manifestEntry = require('./manifest')
 const newtabOverrideCssEntry = require('./newtabOverrideCss')
-// const optionsCssEntry = require('./optionsCss')
+const optionsCssEntry = require('./optionsCss')
 // const popupCssEntry = require('./popupCss')
 // const webAccessibleResourcesEntry = require('./webAccessibleResources')
 
@@ -27,7 +27,7 @@ module.exports = function (compiler, extensionPath) {
       // const locales = await localesEntry(manifestPath)
       // const manifest = await manifestEntry(manifestPath)
       const newtabOverrideCss = await newtabOverrideCssEntry(manifestPath)
-      // const optionsCss = await optionsCssEntry(manifestPath)
+      const optionsCss = await optionsCssEntry(manifestPath)
       // const popupCss = await popupCssEntry(manifestPath)
       // const webAccessibleResourcesCss = await webAccessibleResourcesCssEntry(manifestPath)
 
@@ -41,7 +41,7 @@ module.exports = function (compiler, extensionPath) {
           // ...locales,
           // ...manifest,
           ...newtabOverrideCss,
-          // ...optionsCss,
+          ...optionsCss,
           // ...popupCss,
           // ...webAccessibleResourcesCss
         ]
