@@ -2,8 +2,8 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 const resolveManifest = require('../../resolveManifest')
 const backgroundCSSEntry = require('./backgroundCss')
-const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
-const contentCSSEntry = require('./contentCss')
+// const bookmarksOverrideCSSEntry = require('./bookmarksOverrideCss')
+// const contentCSSEntry = require('./contentCss')
 // const devtoolsCSSEntry = require('./devtoolsCss')
 // const historyOverrideCSSEntry = require('./historyOverrideCss')
 // const localesEntry = require('./locales')
@@ -18,20 +18,32 @@ module.exports = function (compiler, extensionPath) {
 
   return compiler.hooks.watchRun.tapAsync(
     'open-chrome-extension',
-    async (compilation, done) => {
+    async (compiler, done) => {
+      const backgroundCss = await backgroundCSSEntry(manifestPath)
+      // const bookmarksOverrideCSS = await bookmarksOverrideCSSEntry(manifestPath)
+      // const contentCSS = await contentCSSEntry(manifestPath)
+      // const devtoolsCSS = await devtoolsCSSEntry(manifestPath)
+      // const historyOverrideCSS = await historyOverrideCSSEntry(manifestPath)
+      // const locales = await localesEntry(manifestPath)
+      // const manifest = await manifestEntry(manifestPath)
+      // const newtabOverrideCSS = await newtabOverrideCSSEntry(manifestPath)
+      // const optionsCSS = await optionsCSSEntry(manifestPath)
+      // const popupCSS = await popupCSSEntry(manifestPath)
+      // const webAccessibleResourcesCSS = await webAccessibleResourcesCSSEntry(manifestPath)
+
       new CopyPlugin({
         patterns: [
-          ...await backgroundCSSEntry(manifestPath),
-          ...await bookmarksOverrideCSSEntry(manifestPath),
-          ...await contentCSSEntry(manifestPath),
-          // ...await devtoolsCSSEntry(manifestPath),
-          // ...await historyOverrideCSSEntry(manifestPath),
-          // ...await localesEntry(manifestPath),
-          // ...await manifestEntry(manifestPath),
-          // ...await newtabOverrideCSSEntry(manifestPath),
-          // ...await optionsCSSEntry(manifestPath),
-          // ...await popupCSSEntry(manifestPath),
-          // ...await webAccessibleResourcesCSSEntry(manifestPath)
+          ...backgroundCss,
+          // ...bookmarksOverrideCSS,
+          // ...contentCSS,
+          // ...devtoolsCSS,
+          // ...historyOverrideCSS,
+          // ...locales,
+          // ...manifest,
+          // ...newtabOverrideCSS,
+          // ...optionsCSS,
+          // ...popupCSS,
+          // ...webAccessibleResourcesCSS
         ]
       }).apply(compiler)
       done()
