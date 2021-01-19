@@ -1,14 +1,16 @@
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const generateJSEntriesHook =
-  require('./steps/generate-manifest-entries/scriptEntries/hook')
-const generateHTMLEntriesHook =
-  require('./steps/generate-manifest-entries/htmlEntries/hook')
-const generateAssetEntriesHook =
-  require('./steps/generate-manifest-entries/assetEntries/hook')
-const generateScriptFromHtmlEntriesHook =
-  require('./steps/generate-manifest-entries/scriptFromHtmlEntries/hook')
+const assetFromManifestEntry =
+  require('./steps/generate-manifest-entries/assetFromManifestEntry/hook')
+const scriptFromManifestEntry =
+  require('./steps/generate-manifest-entries/scriptFromManifestEntry/hook')
+const htmlFromManifestEntry =
+  require('./steps/generate-manifest-entries/htmlFromManifestEntry/hook')
+const cssFromHtmlEntry =
+  require('./steps/generate-manifest-entries/cssFromHtmlEntry/hook')
+const scriptFromHtmlEntry =
+  require('./steps/generate-manifest-entries/htmlFromManifestEntry/hook')
 const watchFileChangesHook = require('./steps/watch-file-changes/hook')
 const serveExtension = require('./steps/serveExtension')
 
@@ -36,23 +38,26 @@ class RunChromeExtension {
     // Generate the reload extension on the fly since
     // we can't tell what port is available before runtime.
     generateReloadExtension(this.port)
+    // Get relevant HTML entries from manifest file.
+    // Includes locale and the webAccessibleResources array.
+    assetFromManifestEntry(compiler, this.extensionPath)
     // Get JavaScript entries from manifest file.
     // Includes background and content scripts.
-    generateJSEntriesHook(compiler, this.extensionPath)
+    scriptFromManifestEntry(compiler, this.extensionPath)
     // Get relevant HTML entries from manifest file.
     // Includes all manifest fields that accept HTML values.
-    generateHTMLEntriesHook(compiler, this.extensionPath)
+    htmlFromManifestEntry(compiler, this.extensionPath)
     // Get relevant script entries by scrapping HTML pages
     // defined in the manifest file. Includes all scripts
     // defined in every HTML page declared in the manifest file.
-    generateScriptFromHtmlEntriesHook(compiler, this.extensionPath)
+    scriptFromHtmlEntry(compiler, this.extensionPath)
     // Get relevant CSS entries by scrapping HTML pages
     // defined in the manifest file. Includes all CSS
     // defined in every HTML page declared in the manifest file.
-    generateAssetEntriesHook(compiler, this.extensionPath)
-    // Actually watch changes. This will trigger different
+    cssFromHtmlEntry(compiler, this.extensionPath)
+    // Actually watch changes This will trigger different
     // reload strategies based on the manifest field the
-    // file is included. See the method itself for info.
+    // file is included. See the method itself for info..
     watchFileChangesHook(compiler, wss, this.extensionPath)
     // Serve the extension to the browser. At this point
     // the manager extension setup and the client extension

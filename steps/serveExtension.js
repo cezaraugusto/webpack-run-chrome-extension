@@ -27,7 +27,7 @@ module.exports = async function (self = {}) {
   }
 
   // Set user defaults to browser
-  // const chromeConfig = browserConfig(self.extensionPath, browserConfigOptions)
+  const chromeConfig = browserConfig(self.extensionPath, browserConfigOptions)
 
-  // await ChromeLauncher.launch(chromeConfig)
+  await ChromeLauncher.launch(chromeConfig)
 }
