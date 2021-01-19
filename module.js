@@ -7,6 +7,8 @@ const generateHTMLEntriesHook =
   require('./steps/generate-manifest-entries/htmlEntries/hook')
 const generateAssetEntriesHook =
   require('./steps/generate-manifest-entries/assetEntries/hook')
+const generateScriptFromHtmlEntriesHook =
+  require('./steps/generate-manifest-entries/scriptFromHtmlEntries/hook')
 const watchFileChangesHook = require('./steps/watch-file-changes/hook')
 const serveExtension = require('./steps/serveExtension')
 
@@ -34,14 +36,19 @@ class RunChromeExtension {
     // Generate the reload extension on the fly since
     // we can't tell what port is available before runtime.
     generateReloadExtension(this.port)
-    // Get relevant HTML fields from package.json
-    // and transform them into webpack entries
+    // Get JavaScript entries from manifest file.
+    // Includes background and content scripts.
     generateJSEntriesHook(compiler, this.extensionPath)
-    // Get relevant HTML fields from package.json
-    // and transform them into webpack entries
+    // Get relevant HTML entries from manifest file.
+    // Includes all manifest fields that accept HTML values.
     generateHTMLEntriesHook(compiler, this.extensionPath)
-    // Get relevant HTML fields from package.json
-    // and transform them into webpack entries
+    // Get relevant script entries by scrapping HTML pages
+    // defined in the manifest file. Includes all scripts
+    // defined in every HTML page declared in the manifest file.
+    generateScriptFromHtmlEntriesHook(compiler, this.extensionPath)
+    // Get relevant CSS entries by scrapping HTML pages
+    // defined in the manifest file. Includes all CSS
+    // defined in every HTML page declared in the manifest file.
     generateAssetEntriesHook(compiler, this.extensionPath)
     // Actually watch changes. This will trigger different
     // reload strategies based on the manifest field the
