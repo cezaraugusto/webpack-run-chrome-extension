@@ -1,7 +1,7 @@
 const bookmarksOverrideScriptEntry = require('./bookmarksOverrideScript')
 const devtoolsScriptEntry = require('./devtoolsScript')
 const historyOverrideScriptEntry = require('./historyOverrideScript')
-// const newtabOverrideScriptEntry = require('./newtabOverrideScript')
+const newtabOverrideScriptEntry = require('./newtabOverrideScript')
 // const optionsScriptEntry = require('./optionsScript')
 // const popupScriptEntry = require('./popupScript')
 
@@ -10,7 +10,7 @@ module.exports = async function (manifestPath) {
     ...await bookmarksOverrideScriptEntry(manifestPath),
     ...await devtoolsScriptEntry(manifestPath),
     ...await historyOverrideScriptEntry(manifestPath),
-    // ...await newtabOverrideScriptEntry(manifestPath),
+    ...await newtabOverrideScriptEntry(manifestPath),
     // ...await optionsScriptEntry(manifestPath),
     // ...await popupScriptEntry(manifestPath)
   ]
