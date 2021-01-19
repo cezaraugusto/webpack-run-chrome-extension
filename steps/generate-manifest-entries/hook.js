@@ -1,33 +1,33 @@
 const resolveManifest = require('../resolveManifest')
 // const assetFromManifestEntry = require('./assetFromManifestEntry/hook')
 const scriptFromManifestEntry = require('./scriptFromManifestEntry')
+const scriptFromHtmlEntry = require('./scriptFromHtmlEntry')
 // const htmlFromManifestEntry = require('./htmlFromManifestEntry/hook')
 // const cssFromHtmlEntry = require('./cssFromHtmlEntry/hook')
-// const scriptFromHtmlEntry = require('./htmlFromManifestEntry/hook')
 
 module.exports = function (compiler, extensionPath) {
   return compiler.hooks.afterCompile.tapAsync(
     'open-chrome-extension',
-    (compilation, done) => {
+    async (compilation, done) => {
       const manifestPath = resolveManifest(extensionPath)
       const entries = [
         // Get relevant HTML entries from manifest file.
         // Includes locale and the webAccessibleResources array.
-        // ...await assetFromManifestEntry(compiler, extensionPath)
+        // ...await assetFromManifestEntry(manifestPath)
         // Get JavaScript entries from manifest file.
         // Includes background and content scripts.
-        ...scriptFromManifestEntry(manifestPath)
+        ...scriptFromManifestEntry(manifestPath),
         // Get relevant HTML entries from manifest file.
         // Includes all manifest fields that accept HTML values.
-        // ...await htmlFromManifestEntry(compiler, extensionPath)
+        // ...await htmlFromManifestEntry(manifestPath)
         // Get relevant script entries by scrapping HTML pages
         // defined in the manifest file. Includes all scripts
         // defined in every HTML page declared in the manifest file.
-        // ...await scriptFromHtmlEntry(compiler, extensionPath)
+        ...await scriptFromHtmlEntry(manifestPath)
         // Get relevant CSS entries by scrapping HTML pages
         // defined in the manifest file. Includes all CSS
         // defined in every HTML page declared in the manifest file.
-        // ...await cssFromHtmlEntry(compiler, extensionPath)
+        // ...await cssFromHtmlEntry(manifestPath)
       ]
 
       // contextDependencies
