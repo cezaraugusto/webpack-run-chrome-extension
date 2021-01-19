@@ -37,7 +37,6 @@ module.exports = async function (manifestPath) {
   // Do nothing for empty results
   if (patternsArray.length == 0) return []
 
-  // script relativo ao html
   return patternsArray
     .map(script => path.resolve(path.dirname(bookmarksOverride), script))
 }
