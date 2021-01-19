@@ -7,14 +7,10 @@ module.exports = function (manifestPath) {
     !manifest ||
     !manifest.content_scripts ||
     !manifest.content_scripts[0].js
-  ) return {}
+  ) return []
 
   const scripts = manifest.content_scripts[0].js
 
-  return {
-    content: {
-      import: scripts.map(script => path
-        .resolve(path.dirname(manifestPath), script))
-    }
-  }
+  return scripts
+    .map(script => path.resolve(path.dirname(manifestPath), script))
 }

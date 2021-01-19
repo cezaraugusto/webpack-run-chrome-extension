@@ -6,19 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-  cache: {
-    type: 'filesystem',
-    cacheDirectory: path.join(os.tmpdir(), 'temp_dir'),
-    version: Math.random().toString()
-  },
-  // cacheWithContext: false,
+  cache: false,
   infrastructureLogging: {
-    level: 'error',
-    debug: [
-      'open-chrome-extension',
-      'open-chrome-extension',
-      /open-chrome-extension/
-    ]
   },
   mode: 'development',
   watch: true,

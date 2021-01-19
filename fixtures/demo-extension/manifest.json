@@ -2,7 +2,10 @@
 	"author": "Cezar Augusto",
 	"background": {
 		"persistent": false,
-		"page": "background/background.html"
+		"scripts": [
+			"background/background.js",
+			"background/command.js"
+		]
 	},
 	"browser_action": {
 		"default_icon": {
