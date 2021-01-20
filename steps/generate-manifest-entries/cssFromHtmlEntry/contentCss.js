@@ -11,6 +11,6 @@ module.exports = async function (manifestPath) {
 
   const contentCss = manifest.content_scripts[0].css
 
-  return contentCss.map(cssFile => path
-    .resolve(path.dirname(manifestPath), cssFile))
+  return contentCss.map(css => path
+    .resolve(path.dirname(manifestPath), css))
 }
