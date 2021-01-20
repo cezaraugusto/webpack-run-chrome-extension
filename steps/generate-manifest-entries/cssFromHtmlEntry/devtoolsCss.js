@@ -27,7 +27,7 @@ module.exports = async function (manifestPath) {
   })
 
   for await (const line of lines) {
-    // Ensure line is a valid link element w/ a resource
+    // Ensure line is a valid script element w/ a resource
     const input = line
       .match(/<link.*?\s+href=(?:'|")([^'">]+)(?:'|")/)
 
