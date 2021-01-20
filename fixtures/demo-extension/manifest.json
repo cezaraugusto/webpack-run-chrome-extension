@@ -82,6 +82,6 @@
 	"version": "1.0",
 	"version_name": "",
 	"web_accessible_resources": [
-		"public/*"
+		"public/icon/puzzle.png"
 	]
 }

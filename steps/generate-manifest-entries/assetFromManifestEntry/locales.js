@@ -7,10 +7,7 @@ module.exports = function (manifestPath) {
   if (
     !manifest ||
     !manifest.default_locale
-  ) return {}
+  ) return []
 
-  return {
-    from: path.resolve(path.dirname(manifestPath), '_locales'),
-    to: path.join(os.tmpdir(), '_locales')
-  }
+  return path.resolve(path.dirname(manifestPath), '_locales')
 }
