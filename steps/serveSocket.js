@@ -13,6 +13,7 @@ module.exports = function (port) {
 
     ws.on('error', (error) => {
       console.log('Error', error)
+      webSocketServer.close()
     })
 
     ws.on('close', () => {

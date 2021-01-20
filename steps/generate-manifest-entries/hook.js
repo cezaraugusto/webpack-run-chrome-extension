@@ -1,5 +1,4 @@
 const resolveManifest = require('../resolveManifest')
-const assetFromManifestEntry = require('./assetFromManifestEntry')
 const scriptFromManifestEntry = require('./scriptFromManifestEntry')
 const scriptFromHtmlEntry = require('./scriptFromHtmlEntry')
 const htmlFromManifestEntry = require('./htmlFromManifestEntry')
@@ -11,9 +10,6 @@ module.exports = function (compiler, extensionPath) {
     async (compilation, done) => {
       const manifestPath = resolveManifest(extensionPath)
       const entries = [
-        // Get relevant HTML entries from manifest file.
-        // Includes locale and the webAccessibleResources array.
-        ...await assetFromManifestEntry(manifestPath),
         // Get JavaScript entries from manifest file.
         // Includes background and content scripts.
         ...scriptFromManifestEntry(manifestPath),
@@ -30,7 +26,6 @@ module.exports = function (compiler, extensionPath) {
         ...await cssFromHtmlEntry(manifestPath)
       ]
 
-      // contextDependencies
       entries.forEach(path => compilation.fileDependencies.add(path))
       done()
     }
