@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const os = require('os')
 const readline = require('readline')
 
 module.exports = async function (manifestPath) {
@@ -31,20 +30,13 @@ module.exports = async function (manifestPath) {
 
     if (input) {
       const [, source] = input
-
-      // Link elements can point to other resources
-      // but we only want CSS resources
-      if (source.endsWith('.css')) {
-        patternsArray.push({
-          from: path.resolve(
-            path.dirname(bookmarksOverride),
-            source
-          ),
-          to: path.join(os.tmpdir(), source)
-        })
-      }
+      patternsArray.push(source)
     }
   }
 
+  // Do nothing for empty results
+  if (patternsArray.length == 0) return []
+
   return patternsArray
+    .map(css => path.resolve(path.dirname(bookmarksOverride), css))
 }

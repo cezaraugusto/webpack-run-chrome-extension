@@ -3,7 +3,7 @@ const resolveManifest = require('../resolveManifest')
 const scriptFromManifestEntry = require('./scriptFromManifestEntry')
 const scriptFromHtmlEntry = require('./scriptFromHtmlEntry')
 const htmlFromManifestEntry = require('./htmlFromManifestEntry')
-// const cssFromHtmlEntry = require('./cssFromHtmlEntry')
+const cssFromHtmlEntry = require('./cssFromHtmlEntry')
 
 module.exports = function (compiler, extensionPath) {
   return compiler.hooks.afterCompile.tapAsync(
@@ -23,11 +23,11 @@ module.exports = function (compiler, extensionPath) {
         // Get relevant script entries by scrapping HTML pages
         // defined in the manifest file. Includes all scripts
         // defined in every HTML page declared in the manifest file.
-        ...await scriptFromHtmlEntry(manifestPath)
+        ...await scriptFromHtmlEntry(manifestPath),
         // Get relevant CSS entries by scrapping HTML pages
         // defined in the manifest file. Includes all CSS
         // defined in every HTML page declared in the manifest file.
-        // ...await cssFromHtmlEntry(manifestPath)
+        ...await cssFromHtmlEntry(manifestPath)
       ]
 
       // contextDependencies
