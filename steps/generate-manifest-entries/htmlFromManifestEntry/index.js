@@ -1,17 +1,19 @@
-// const popupPageHTMLEntry = require('./popupPage')
-// const optionsPageHTMLEntry = require('./optionsPage')
 const backgroundPageHTMLEntry = require('./backgroundPage')
+const bookmarksOverridePageHTMLEntry = require('./bookmarksOverridePage')
 // const devtoolsPageHTMLEntry = require('./devtoolsPage')
-// const newtabOverridePageHTMLEntry = require('./newtabOverridePage')
 // const historyOverridePageHTMLEntry = require('./historyOverridePage')
+// const newtabOverridePageHTMLEntry = require('./newtabOverridePage')
+// const optionsPageHTMLEntry = require('./optionsPage')
+// const popupPageHTMLEntry = require('./popupPage')
 
 module.exports = function (extensionPath) {
   return [
-    // ...popupPageHTMLEntry(extensionPath),
-    // ...optionsPageHTMLEntry(extensionPath),
     backgroundPageHTMLEntry(extensionPath),
+    bookmarksOverridePageHTMLEntry(extensionPath),
     // ...devtoolsPageHTMLEntry(extensionPath),
-    // ...newtabOverridePageHTMLEntry(extensionPath),
     // ...historyOverridePageHTMLEntry(extensionPath)
+    // ...newtabOverridePageHTMLEntry(extensionPath),
+    // ...optionsPageHTMLEntry(extensionPath),
+    // ...popupPageHTMLEntry(extensionPath),
   ]
 }
