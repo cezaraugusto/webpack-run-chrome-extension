@@ -1,9 +1,9 @@
 const resolveManifest = require('../resolveManifest')
-// const assetFromManifestEntry = require('./assetFromManifestEntry/hook')
+// const assetFromManifestEntry = require('./assetFromManifestEntry')
 const scriptFromManifestEntry = require('./scriptFromManifestEntry')
 const scriptFromHtmlEntry = require('./scriptFromHtmlEntry')
-// const htmlFromManifestEntry = require('./htmlFromManifestEntry/hook')
-// const cssFromHtmlEntry = require('./cssFromHtmlEntry/hook')
+const htmlFromManifestEntry = require('./htmlFromManifestEntry')
+// const cssFromHtmlEntry = require('./cssFromHtmlEntry')
 
 module.exports = function (compiler, extensionPath) {
   return compiler.hooks.afterCompile.tapAsync(
@@ -19,7 +19,7 @@ module.exports = function (compiler, extensionPath) {
         ...scriptFromManifestEntry(manifestPath),
         // Get relevant HTML entries from manifest file.
         // Includes all manifest fields that accept HTML values.
-        // ...await htmlFromManifestEntry(manifestPath)
+        ...htmlFromManifestEntry(manifestPath),
         // Get relevant script entries by scrapping HTML pages
         // defined in the manifest file. Includes all scripts
         // defined in every HTML page declared in the manifest file.
