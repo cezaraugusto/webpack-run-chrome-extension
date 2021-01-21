@@ -24,22 +24,18 @@ ws.onmessage = async (event) => {
   }
 
   if (message.status === 'tabReload') {
-    switch (message.where) {
-      case 'backgroundPage':
-      case 'newtab':
-      case 'popup':
-      case 'bookmarks':
-      case 'history':
-      default:
-        ws.send(JSON.stringify({ status: 'tabReloaded' }))
-        await reloadTab()
-        break
-    }
+    await reloadTab()
+    ws.send(JSON.stringify({ status: 'tabReloaded' }))
   }
 
   if (message.status === 'allTabsReload') {
-    ws.send(JSON.stringify({ status: 'allTabsReloaded' }))
     await reloadAllTabs()
+    ws.send(JSON.stringify({ status: 'allTabsReloaded' }))
+  }
+
+  if (message.status === 'inspectedWindowReload') {
+    await reloadInspectedWindow()
+    ws.send(JSON.stringify({ status: 'inspectedWindowReloaded' }))
   }
 
   // Response status
@@ -60,6 +56,12 @@ ws.onmessage = async (event) => {
       '[Reload Service] All tabs reloaded. Watching changes...'
     )
   }
+
+  // if (message.status === 'inspectedWindowReload') {
+  //   console.log(
+  //     '[Reload Service] Inspected window reloaded. Watching changes...'
+  //   )
+  // }
 }
 
 async function getDevExtensions () {
@@ -115,3 +117,9 @@ async function reloadAllTabs () {
     })
   })
 }
+
+// async function reloadInspectedWindow () {
+//   await new Promise((resolve) => {
+//     return chrome.devtools.inspectedWindow.reload(resolve)
+//   })
+// }

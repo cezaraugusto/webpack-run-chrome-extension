@@ -7,17 +7,12 @@ const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   cache: false,
-  infrastructureLogging: {
-  },
   mode: 'development',
   watch: true,
   entry: {
     custom: [
       path.resolve(__dirname, './demo-extension/custom/custom1.js')
     ]
-  },
-  resolve: {
-    extensions: ['.js', '.json']
   },
   plugins: [
     new OpenChromeExtension({

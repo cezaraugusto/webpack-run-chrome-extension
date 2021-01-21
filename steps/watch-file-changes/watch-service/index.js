@@ -12,11 +12,18 @@ module.exports = function (wss, extensionPath, file) {
   if (
     watched.backgroundScript.includes(file) ||
     watched.htmlScript.includes(file + '$') ||
-    watched.htmlCss.includes(file + '$') ||
-    file === watched.devtoolsPage
+    watched.htmlCss.includes(file + '$')
+    ) {
+      console.log('👀👀👀👀👀👀👀👀 RELOAD EXTENSION~!!!!', file)
+      broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    }
+
+  if (
+    file === watched.devtoolsPage ||
+    file.startsWith(watched.devtoolsPage)
   ) {
-    console.log('👀👀👀👀👀👀👀👀 RELOAD EXTENSION~!!!!', file)
-    broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹 devtools', file)
+    broadcastSocketMessage(wss, { status: 'inspectedWindowReload' })
   }
 
   // For within a given tab, reload the given tab
@@ -52,6 +59,11 @@ module.exports = function (wss, extensionPath, file) {
     })
   }
 
+  if (file === watched.optionsPage) {
+    console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹 OPTIONS', file)
+    broadcastSocketMessage(wss, { status: 'allTabsReload' })
+  }
+
   if (file === watched.popupPage) {
     console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹 POPUP', file)
     broadcastSocketMessage(wss, {
@@ -65,6 +77,7 @@ module.exports = function (wss, extensionPath, file) {
     watched.contentScript.includes(file) ||
     watched.contentCss.includes(file)
   ) {
+    broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
     broadcastSocketMessage(wss, { status: 'allTabsReload' })
     console.log('🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆 reload all tabsssssss', file)
   }

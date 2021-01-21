@@ -1,3 +1,4 @@
+const backgroundPageScriptEntry = require('./backgroundPageScript')
 const bookmarksOverrideScriptEntry = require('./bookmarksOverrideScript')
 const devtoolsScriptEntry = require('./devtoolsScript')
 const historyOverrideScriptEntry = require('./historyOverrideScript')
@@ -7,6 +8,7 @@ const popupScriptEntry = require('./popupScript')
 
 module.exports = async function (manifestPath) {
   return [
+    ...await backgroundPageScriptEntry(manifestPath),
     ...await bookmarksOverrideScriptEntry(manifestPath),
     ...await devtoolsScriptEntry(manifestPath),
     ...await historyOverrideScriptEntry(manifestPath),
