@@ -23,17 +23,41 @@ ws.onmessage = async (event) => {
     ws.send(JSON.stringify({ status: 'extensionReloaded' }))
   }
 
-  // If (message.status === 'tabReloadRequested') {
-  //  TODO
-  // }
+  if (message.status === 'tabReload') {
+    switch (message.where) {
+      case 'backgroundPage':
+      case 'newtab':
+      case 'popup':
+      case 'bookmarks':
+      case 'history':
+      default:
+        await reloadTab()
+        ws.send(JSON.stringify({ status: 'tabReloaded' }))
+        break
+    }
+  }
 
-  // if (message.status === 'allTabsReloadRequested') {
-  //  TODO
-  // }
+  if (message.status === 'allTabsReload') {
+    await reloadAllTabs()
+    ws.send(JSON.stringify({ status: 'allTabsReloaded' }))
+  }
 
+  // Response status
   if (message.status === 'extensionReloaded') {
     console.log(
       '[Reload Service] Extension reloaded. Watching changes...'
+    )
+  }
+
+  if (message.status === 'tabReloaded') {
+    console.log(
+      '[Reload Service] Current tab reloaded. Watching changes...'
+    )
+  }
+
+  if (message.status === 'allTabsReloaded') {
+    console.log(
+      '[Reload Service] All tabs reloaded. Watching changes...'
     )
   }
 }
@@ -76,18 +100,18 @@ async function reloadAllExtensions () {
   await Promise.all(reloadAll)
 }
 
-// Async function reloadTab () {
-//   await new Promise((resolve) => {
-//     return chrome.tabs.getCurrent(tab => {
-//       chrome.tabs.reload(tab.id)
-//     }, resolve)
-//   })
-// }
+async function reloadTab () {
+  await new Promise((resolve) => {
+    return chrome.tabs.getCurrent(tab => {
+      chrome.tabs.reload(tab.id)
+    }, resolve)
+  })
+}
 
-// async function reloadAllTabs () {
-//   await new Promise((resolve) => {
-//     return chrome.tabs.query({}, tabs => {
-//       tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
-//     })
-//   })
-// }
+async function reloadAllTabs () {
+  await new Promise((resolve) => {
+    return chrome.tabs.query({}, tabs => {
+      tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
+    })
+  })
+}
