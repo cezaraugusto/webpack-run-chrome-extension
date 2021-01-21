@@ -18,7 +18,7 @@ ws.onopen = () => {
 ws.onmessage = async (event) => {
   const message = JSON.parse(event.data)
 
-  if (message.status === 'extensionReloadRequested') {
+  if (message.status === 'fullExtensionReload') {
     await reloadAllExtensions()
     ws.send(JSON.stringify({ status: 'extensionReloaded' }))
   }

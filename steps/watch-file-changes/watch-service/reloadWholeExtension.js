@@ -6,7 +6,7 @@ module.exports = function (wss, manifest, changedFile) {
   }
 
   console.log('FILE CHANGED: 🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️🏴‍☠️', changedFile)
-  broadcastSocketMessage(wss, { status: 'extensionReloadRequested' })
+  broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
 // if (file === manifest)
 // if (changedFiles.size === 1) {
 //   console.log('😎😎😎😎😎😎😎😎😎😎', )

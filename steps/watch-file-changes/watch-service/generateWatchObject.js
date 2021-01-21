@@ -6,7 +6,7 @@ const {
   resolveDependencyArrayEntry
 } = require('./resolveEntry')
 
-module.exports = function (extensionPath) {
+module.exports = function (extensionPath, file) {
   const manifestPath = resolveManifest(extensionPath)
   const manifest = require(manifestPath)
 
