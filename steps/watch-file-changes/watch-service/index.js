@@ -1,5 +1,3 @@
-
-const { watch } = require('fs-extra')
 const broadcastSocketMessage = require('../broadcastSocketMessage')
 const generateWatchObject = require('./generateWatchObject')
 
@@ -8,7 +6,6 @@ module.exports = function (wss, extensionPath, file) {
 
   const watched = generateWatchObject(extensionPath, file)
 
-  console.log('ahhhhhhh', file)
   // For changes outside of the tab scope,
   // reload the whole extension
   if (

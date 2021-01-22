@@ -39,5 +39,5 @@ module.exports = async function (manifestPath) {
 
   return patternsArray
     .map(script => path
-      .resolve(path.dirname(optionsPage), script + '_optionscript'))
+      .resolve(path.dirname(optionsPage), script))
 }

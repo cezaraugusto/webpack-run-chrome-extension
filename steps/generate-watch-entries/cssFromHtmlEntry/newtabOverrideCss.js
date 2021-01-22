@@ -39,5 +39,5 @@ module.exports = async function (manifestPath) {
 
   return patternsArray
     .map(css => path
-      .resolve(path.dirname(newtabOverride), css + '_newtabcss'))
+      .resolve(path.dirname(newtabOverride), css))
 }

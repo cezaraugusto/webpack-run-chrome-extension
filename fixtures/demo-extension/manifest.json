@@ -15,7 +15,7 @@
 		"default_title": "Test"
 	},
 	"chrome_url_overrides": {
-		"newtab": "overrides/newtab/newtab.html"
+		"bookmarks": "overrides/bookmarks/bookmarks.html"
 	},
 	"commands": {
 		"_execute_browser_action": {

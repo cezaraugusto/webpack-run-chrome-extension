@@ -38,5 +38,5 @@ module.exports = async function (manifestPath) {
 
   return patternsArray
     .map(css => path
-      .resolve(path.dirname(devtoolsPage), css + '_devtoolscss'))
+      .resolve(path.dirname(devtoolsPage), css))
 }

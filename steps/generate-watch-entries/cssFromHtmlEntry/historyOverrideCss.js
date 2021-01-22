@@ -39,5 +39,5 @@ module.exports = async function (manifestPath) {
 
   return patternsArray
     .map(css => path
-      .resolve(path.dirname(historyOverride), css + '_historycss'))
+      .resolve(path.dirname(historyOverride), css))
 }

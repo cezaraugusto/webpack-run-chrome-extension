@@ -39,5 +39,5 @@ module.exports = async function (manifestPath) {
 
   return patternsArray
     .map(script => path
-      .resolve(path.dirname(bookmarksOverride), script + '_bookmarksscript'))
+      .resolve(path.dirname(bookmarksOverride), script))
 }
