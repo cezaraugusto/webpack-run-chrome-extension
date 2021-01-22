@@ -13,12 +13,17 @@ function resolveArrayEntry (manifestPath, files) {
     .map(file => path.resolve(path.dirname(manifestPath), file))
 }
 
-function resolveDependencyArrayEntry (manifestPath, files) {
+function resolveDependencyArrayEntry (
+  manifestPath,
+  files,
+  fromWhere
+) {
   if (!files || files.length === 0) return []
   if (!Array.isArray(files)) return [files]
 
   return files
-    .map(file => path.resolve(path.dirname(manifestPath), file + '$'))
+    .map(file => path
+      .resolve(path.dirname(manifestPath), file + fromWhere))
 }
 
 module.exports = {

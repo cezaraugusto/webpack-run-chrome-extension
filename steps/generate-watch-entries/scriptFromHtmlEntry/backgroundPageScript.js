@@ -38,5 +38,9 @@ module.exports = async function (manifestPath) {
   if (patternsArray.length == 0) return []
 
   return patternsArray
-    .map(script => path.resolve(path.dirname(backgroundPageScript), script))
+    .map(script => path
+      .resolve(
+        path.dirname(backgroundPageScript),
+        script + '_backgroundscript')
+      )
 }

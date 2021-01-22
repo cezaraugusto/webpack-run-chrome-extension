@@ -38,5 +38,6 @@ module.exports = async function (manifestPath) {
   if (patternsArray.length == 0) return []
 
   return patternsArray
-    .map(css => path.resolve(path.dirname(popupPage), css))
+    .map(css => path
+      .resolve(path.dirname(popupPage), css + '_popupcss'))
 }

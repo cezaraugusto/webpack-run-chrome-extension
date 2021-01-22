@@ -38,5 +38,6 @@ module.exports = async function (manifestPath) {
   if (patternsArray.length == 0) return []
 
   return patternsArray
-    .map(script => path.resolve(path.dirname(historyOverride), script))
+    .map(script => path
+      .resolve(path.dirname(historyOverride), script + '_historyscript'))
 }

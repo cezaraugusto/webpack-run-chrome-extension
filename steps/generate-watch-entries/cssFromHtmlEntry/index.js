@@ -1,4 +1,3 @@
-const backgroundCssEntry = require('./backgroundCss')
 const bookmarksOverrideCssEntry = require('./bookmarksOverrideCss')
 const contentCssEntry = require('./contentCss')
 const devtoolsCssEntry = require('./devtoolsCss')
@@ -9,7 +8,6 @@ const popupCssEntry = require('./popupCss')
 
 module.exports = async function (manifestPath) {
   return [
-    ...await backgroundCssEntry(manifestPath),
     ...await bookmarksOverrideCssEntry(manifestPath),
     ...await contentCssEntry(manifestPath),
     ...await devtoolsCssEntry(manifestPath),
