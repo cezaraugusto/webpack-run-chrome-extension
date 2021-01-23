@@ -9,7 +9,6 @@ module.exports = function (compiler, extensionPath) {
     'open-chrome-extension',
     async (compilation, done) => {
       const manifestPath = resolveManifest(extensionPath)
-      console.log('que merda eh essa?', ...await scriptFromHtmlEntry(manifestPath))
       const entries = [
         // Get JavaScript entries from manifest file.
         // Includes background and content scripts.

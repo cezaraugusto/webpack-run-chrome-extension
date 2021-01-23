@@ -6,10 +6,12 @@ module.exports = function (wss, extensionPath, file) {
 
   const watched = generateWatchObject(extensionPath, file)
 
+  console.log('👀👀👀👀👀👀👀👀 the file i watch', file)
+  console.log('🌹🌹🌹🌹🌹🌹🌹 should match with', watched.backgroundPageScript)
   // For changes outside of the tab scope,
   // reload the whole extension
   if (
-    file + '_backgroundscript' === watched.backgroundScript ||
+    file + '_backgroundscript' === watched.backgroundPageScript ||
     watched.backgroundScript.includes(file) ||
     file === watched.backgroundScriptPage
   ) {

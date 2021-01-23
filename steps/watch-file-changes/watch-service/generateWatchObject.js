@@ -2,7 +2,7 @@ const resolveManifest = require('../../resolveManifest')
 
 const {
   resolveEntry,
-  resolveDependencyArrayEntry,
+  resolveDependencyEntry,
   resolveArrayEntry
 } = require('./resolveEntry')
 
@@ -27,8 +27,7 @@ module.exports = function (extensionPath, file) {
     backgroundPageScript: (
       manifest.background &&
       manifest.background.page &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.background.page,
         file + '_backgroundscript'
       )
@@ -42,8 +41,7 @@ module.exports = function (extensionPath, file) {
     popupScript: (
       manifest.browser_action &&
       manifest.browser_action.default_popup &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.browser_action.default_popup,
         file + '_popupscript'
       )
@@ -51,8 +49,7 @@ module.exports = function (extensionPath, file) {
     popupCss: (
       manifest.browser_action &&
       manifest.browser_action.default_popup &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.browser_action.default_popup,
         file + '_popupcss'
       )
@@ -66,8 +63,7 @@ module.exports = function (extensionPath, file) {
     newtabOverrideScript: (
       manifest.chrome_url_overrides &&
       manifest.chrome_url_overrides.newtab &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.chrome_url_overrides.newtab,
         file + '_newtabscript'
       )
@@ -75,8 +71,7 @@ module.exports = function (extensionPath, file) {
     newtabOverrideCss: (
       manifest.chrome_url_overrides &&
       manifest.chrome_url_overrides.newtab &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.chrome_url_overrides.newtab,
         file + '_newtabcss'
       )
@@ -90,8 +85,7 @@ module.exports = function (extensionPath, file) {
     historyOverrideScript: (
       manifest.chrome_url_overrides &&
       manifest.chrome_url_overrides.history &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.chrome_url_overrides.history,
         file + '_historyscript'
       )
@@ -99,8 +93,7 @@ module.exports = function (extensionPath, file) {
     historyOverrideCss: (
       manifest.chrome_url_overrides &&
       manifest.chrome_url_overrides.history &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.chrome_url_overrides.history,
         file + '_historycss'
       )
@@ -114,8 +107,7 @@ module.exports = function (extensionPath, file) {
     bookmarksOverrideScript: (
       manifest.chrome_url_overrides &&
       manifest.chrome_url_overrides.bookmarks &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.chrome_url_overrides.bookmarks,
         file + '_bookmarksscript'
       )
@@ -123,8 +115,7 @@ module.exports = function (extensionPath, file) {
     bookmarksOverrideCss: (
       manifest.chrome_url_overrides &&
       manifest.chrome_url_overrides.bookmarks &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.chrome_url_overrides.bookmarks,
         file + '_bookmarkscss'
       )
@@ -152,16 +143,14 @@ module.exports = function (extensionPath, file) {
     ),
     devtoolsScript: (
       manifest.devtools_page &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.devtools_page,
         file + '_devtoolsscript'
       )
     ),
     devtoolsCss: (
       manifest.devtools_page &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.devtools_page,
         file + '_devtoolscss'
       )
@@ -175,8 +164,7 @@ module.exports = function (extensionPath, file) {
     optionsScript: (
       manifest.options_ui &&
       manifest.options_ui.page &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.options_ui.page,
         file + '_optionsscript'
       )
@@ -184,8 +172,7 @@ module.exports = function (extensionPath, file) {
     optionsCss: (
       manifest.options_ui &&
       manifest.options_ui.page &&
-      resolveDependencyArrayEntry(
-        manifestPath,
+      resolveDependencyEntry(
         manifest.options_ui.page,
         file + '_optionscss'
       )
@@ -194,15 +181,13 @@ module.exports = function (extensionPath, file) {
     // htmlScript: (
     //   file &&
     //   file.endsWith('.js') &&
-    //   resolveDependencyArrayEntry(manifestPath, file) ||
-    //   []
+    //   resolveDependencyEntry(m
     // ),
     // // Reload all tabs
     // htmlCss: (
     //   file &&
     //   file.endsWith('.css') &&
-    //   resolveDependencyArrayEntry(manifestPath, file) ||
-    //   []
+    //   resolveDependencyEntry(m
     // )
   }
 }
