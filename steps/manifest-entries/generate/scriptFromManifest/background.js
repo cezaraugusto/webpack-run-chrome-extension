@@ -7,14 +7,10 @@ module.exports = function (manifestPath) {
     !manifest ||
     !manifest.background ||
     !manifest.background.scripts
-  ) return {}
+  ) return []
 
   const scripts = manifest.background.scripts
 
-  return {
-    background: {
-      import: scripts.map(script => path
-        .resolve(path.dirname(manifestPath), script))
-    }
-  }
+  return scripts
+    .map(script => path.resolve(path.dirname(manifestPath), script))
 }

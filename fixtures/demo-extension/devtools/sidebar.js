@@ -4,9 +4,8 @@ chrome
   .devtools
   .panels
   .elements
-  .createSidebarPane('DOM Sidebar', sidebar => {
-
+  .createSidebarPane('My Own Sidebar', sidebar => {
     chrome.devtools.panels.elements.onSelectionChanged.addListener(() => {
       sidebar.setExpression('$0')
     })
-})
+  })

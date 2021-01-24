@@ -8,7 +8,7 @@ const webpackConfig = require('./fixtures/webpack.config')
 
 // RunChromeExtension is now a mock constructor
 jest.mock('./module')
-jest.mock('./steps/createUserDataDir')
+jest.mock('./steps/manifest-entries/watch/createUserDataDir')
 
 describe('webpack-run-chrome-extension', () => {
   describe('webpack config', () => {

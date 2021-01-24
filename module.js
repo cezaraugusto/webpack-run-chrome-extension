@@ -1,12 +1,8 @@
-
-
-
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const generateManifestEntriesHook =
-  require('./steps/generate-manifest-entries/hook')
-const watchFileChangesHook = require('./steps/watch-file-changes/hook')
+const generateWatchEntriesHook = require('./steps/manifest-entries/generate/hook')
+const watchFileChangesHook = require('./steps/manifest-entries/watch/hook')
 const serveExtension = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server
@@ -33,10 +29,10 @@ class RunChromeExtension {
     // Generate the reload extension on the fly since
     // we can't tell what port is available before runtime.
     generateReloadExtension(this.port)
-    // Get relevant fields from package.json and transform
-    // them into webpack entries
-    generateManifestEntriesHook(compiler, this.extensionPath)
-    // Actually watch changes. This will trigger different
+    // Generate watch files from manifest entries and
+    // JS/CSS files defined in HTML files also from the manifest.
+    generateWatchEntriesHook(compiler, this.extensionPath)
+    // Actually watch changes This will trigger different
     // reload strategies based on the manifest field the
     // file is included. See the method itself for info.
     watchFileChangesHook(compiler, wss, this.extensionPath)

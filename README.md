@@ -114,7 +114,7 @@ Whether to enable auto-reload on save. Defaults to `true`
 
 Type: `number`
 
-What port should run the extension reloader. Defaults to `8080`
+What port should run the extension reloader. Defaults to `8081`
 
 ## License
 

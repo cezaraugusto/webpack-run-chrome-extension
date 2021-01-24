@@ -1,5 +1,5 @@
 /* global chrome */
-const ws = new window.WebSocket('ws://localhost:8080')
+const ws = new window.WebSocket('ws://localhost:8081')
 
 // Gracefully close websocket connection before unloading app
 window.onbeforeunload = () => {
@@ -18,22 +18,62 @@ ws.onopen = () => {
 ws.onmessage = async (event) => {
   const message = JSON.parse(event.data)
 
-  if (message.status === 'extensionReloadRequested') {
+  if (message.status === 'extensionReload') {
     await reloadAllExtensions()
     ws.send(JSON.stringify({ status: 'extensionReloaded' }))
   }
 
-  // If (message.status === 'tabReloadRequested') {
-  //  TODO
-  // }
+  if (message.status === 'tabReload') {
+    await reloadTab()
+    ws.send(JSON.stringify({ status: 'tabReloaded' }))
+  }
 
-  // if (message.status === 'allTabsReloadRequested') {
-  //  TODO
-  // }
+  if (message.status === 'allTabsReload') {
+    await reloadAllTabs()
+    ws.send(JSON.stringify({ status: 'allTabsReloaded' }))
+  }
 
+  if (message.status === 'devtoolsReload') {
+    ws.send(JSON.stringify({ status: 'devtoolsReloaded' }))
+  }
+
+  if (message.status === 'reloadEverything') {
+    await reloadAllExtensions()
+    await reloadAllTabs()
+    ws.send(JSON.stringify({
+      status: 'everythingReloaded',
+      where: message.where
+    }))
+  }
+
+  // Response status
   if (message.status === 'extensionReloaded') {
     console.log(
       '[Reload Service] Extension reloaded. Watching changes...'
+    )
+  }
+
+  if (message.status === 'tabReloaded') {
+    console.log(
+      '[Reload Service] Current tab reloaded. Watching changes...'
+    )
+  }
+
+  if (message.status === 'allTabsReloaded') {
+    console.log(
+      '[Reload Service] All tabs reloaded. Watching changes...'
+    )
+  }
+
+  if (message.status === 'devtoolsReload') {
+    console.log(
+      '[Reload Service] Developer tools reloaded. Watching changes...'
+    )
+  }
+
+  if (message.status === 'reloadedEverything') {
+    console.log(
+      `[Reload Service] ${message.where} reloaded. Watching changes...`
     )
   }
 }
@@ -76,18 +116,29 @@ async function reloadAllExtensions () {
   await Promise.all(reloadAll)
 }
 
-// Async function reloadTab () {
-//   await new Promise((resolve) => {
-//     return chrome.tabs.getCurrent(tab => {
-//       chrome.tabs.reload(tab.id)
-//     }, resolve)
-//   })
+// Function reloadPage () {
+//   chrome.tabs.query(
+//     { active: true, currentWindow: true },
+//     (arrayOfTabs) => {
+//       const code = 'chrome.runtime.reload();console.log("made it!!!");'
+
+//       chrome.tabs.executeScript(arrayOfTabs[0].id, { code })
+//     }
+//   )
 // }
 
-// async function reloadAllTabs () {
-//   await new Promise((resolve) => {
-//     return chrome.tabs.query({}, tabs => {
-//       tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
-//     })
-//   })
-// }
+async function reloadTab () {
+  await new Promise((resolve) => {
+    return chrome.tabs.getCurrent(tab => {
+      chrome.tabs.reload(tab.id)
+    }, resolve)
+  })
+}
+
+async function reloadAllTabs () {
+  await new Promise((resolve) => {
+    return chrome.tabs.query({}, tabs => {
+      tabs.forEach(tab => chrome.tabs.reload(tab.id), resolve)
+    })
+  })
+}

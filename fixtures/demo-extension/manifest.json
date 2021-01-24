@@ -2,10 +2,7 @@
 	"author": "Cezar Augusto",
 	"background": {
 		"persistent": false,
-		"scripts": [
-			"background/background.js",
-			"background/command.js"
-		]
+    "page": "background/background.html"
 	},
 	"browser_action": {
 		"default_icon": {
@@ -18,7 +15,7 @@
 		"default_title": "Test"
 	},
 	"chrome_url_overrides": {
-		"newtab": "custom/custom.html"
+		"history": "overrides/history/history.html"
 	},
 	"commands": {
 		"_execute_browser_action": {

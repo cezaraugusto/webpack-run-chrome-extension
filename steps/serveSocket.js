@@ -13,6 +13,7 @@ module.exports = function (port) {
 
     ws.on('error', (error) => {
       console.log('Error', error)
+      webSocketServer.close()
     })
 
     ws.on('close', () => {
@@ -35,15 +36,24 @@ module.exports = function (port) {
       }
 
       if (message.status === 'tabReloaded') {
-        // Console.log(
-        //   'Extension tab reloaded. Watching for changes...\n'
-        // )
+        console.log(
+          'Extension tab reloaded. Watching for changes...\n'
+        )
       }
 
       if (message.status === 'allTabsReloaded') {
-        // Console.log(
-        //   'Extension reloaded. Watching for changes...\n'
-        // )
+        console.log(
+          'All tabs reloaded. Watching for changes...\n'
+        )
+      }
+
+      if (
+        message.status === 'extensionReloaded' &&
+        message.status === 'allTabsReloaded'
+      ) {
+        console.log(
+          'Extension and tabs reloaded. Watching for changes...\n'
+        )
       }
     })
   })
