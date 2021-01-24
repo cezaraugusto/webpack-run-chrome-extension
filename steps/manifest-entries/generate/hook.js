@@ -1,8 +1,8 @@
-const resolveManifest = require('../../resolveManifest')
-const scriptFromManifest = require('./scriptFromManifest')
-const scriptFromHtml = require('./scriptFromHtml')
-const htmlFromManifest = require('./htmlFromManifest')
-const cssFromHtml = require('./cssFromHtml')
+const resolveManifest = require('../resolveManifest')
+const scriptFromManifest = require('../generate/scriptFromManifest')
+const scriptFromHtml = require('../generate/scriptFromHtml')
+const htmlFromManifest = require('../generate/htmlFromManifest')
+const cssFromHtml = require('../generate/cssFromHtml')
 
 module.exports = function (compiler, extensionPath) {
   return compiler.hooks.afterCompile.tapAsync(
