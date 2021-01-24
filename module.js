@@ -1,8 +1,8 @@
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const generateWatchEntriesHook = require('./steps/generate/hook')
-const watchFileChangesHook = require('./steps/watch/hook')
+const generateWatchEntriesHook = require('./steps/manifest-entries/generate/hook')
+const watchFileChangesHook = require('./steps/manifest-entries/watch/hook')
 const serveExtension = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server

@@ -1,4 +1,4 @@
-const resolveManifest = require('../resolveManifest')
+const resolveManifest = require('../../resolveManifest')
 const scriptFromManifest = require('./scriptFromManifest')
 const scriptFromHtml = require('./scriptFromHtml')
 const htmlFromManifest = require('./htmlFromManifest')
