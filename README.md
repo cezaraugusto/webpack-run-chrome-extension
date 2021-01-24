@@ -34,7 +34,7 @@ yarn demo
 ## Usage
 
 ```
-yarn add webpack-run-chrome-extension -D
+yarn add webpack-run-chrome-extension --save-dev
 ```
 
 If you want to watch for file changes in your extension, `watch` mode must be enabled.
