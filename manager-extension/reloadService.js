@@ -24,7 +24,7 @@ ws.onmessage = async (event) => {
   }
 
   if (message.status === 'tabReload') {
-    // await reloadTab()
+    // Await reloadTab()
     // reloadPage()
     ws.send(JSON.stringify({ status: 'tabReloaded' }))
   }
@@ -58,7 +58,7 @@ ws.onmessage = async (event) => {
     )
   }
 
-  // if (message.status === 'inspectedWindowReload') {
+  // If (message.status === 'inspectedWindowReload') {
   //   console.log(
   //     '[Reload Service] Inspected window reloaded. Watching changes...'
   //   )
@@ -104,9 +104,10 @@ async function reloadAllExtensions () {
 }
 
 function reloadPage () {
-  chrome.tabs.query({active: true, currentWindow: true}, function (arrayOfTabs) {
-    var code = 'window.location.reload();';
-    chrome.tabs.executeScript(arrayOfTabs[0].id, {code: code});
+  chrome.tabs.query({ active: true, currentWindow: true }, function (arrayOfTabs) {
+    const code = 'window.location.reload();'
+
+    chrome.tabs.executeScript(arrayOfTabs[0].id, { code })
   })
 }
 
@@ -126,7 +127,7 @@ async function reloadAllTabs () {
   })
 }
 
-// async function reloadInspectedWindow () {
+// Async function reloadInspectedWindow () {
 //   await new Promise((resolve) => {
 //     return chrome.devtools.inspectedWindow.reload(resolve)
 //   })

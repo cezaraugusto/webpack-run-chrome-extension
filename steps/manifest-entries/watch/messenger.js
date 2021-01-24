@@ -1,5 +1,4 @@
 const resolveManifest = require('../resolveManifest')
-
 const bookmarksOverrideCssEntry =
   require('../generate/cssFromHtml/bookmarksOverrideCss')
 const contentCssEntry =
@@ -12,7 +11,6 @@ const newtabOverrideCssEntry =
   require('../generate/cssFromHtml/newtabOverrideCss')
 const optionsCssEntry = require('../generate/cssFromHtml/optionsCss')
 const popupCssEntry = require('../generate/cssFromHtml/popupCss')
-
 const backgroundPageHtmlEntry =
   require('../generate/htmlFromManifest/backgroundPage')
 const bookmarksOverridePageHtmlEntry =
@@ -35,13 +33,12 @@ const historyOverrideScriptEntry = require('../generate/scriptFromHtml/historyOv
 const newtabOverrideScriptEntry = require('../generate/scriptFromHtml/newtabOverrideScript')
 const optionsScriptEntry = require('../generate/scriptFromHtml/optionsScript')
 const popupScriptEntry = require('../generate/scriptFromHtml/popupScript')
-
 const backgroundScriptEntry =
   require('../generate/scriptFromManifest/backgroundScript')
 const contentScriptEntry =
   require('../generate/scriptFromManifest/contentScript')
 
-// const broadcastSocketMessage = require('../broadcastSocketMessage')
+// Const broadcastSocketMessage = require('../broadcastSocketMessage')
 
 module.exports = async function (wss, extensionPath, changedFile) {
   if (!changedFile) return
@@ -75,98 +72,109 @@ module.exports = async function (wss, extensionPath, changedFile) {
   const backgroundScript = backgroundScriptEntry(manifestPath)
   const contentScript = contentScriptEntry(manifestPath)
 
-
   if (bookmarksOverrideCss.includes(changedFile)) {
     console.log('bookmarks css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (contentCss.includes(changedFile)) {
     console.log('content css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (devtoolsCss.includes(changedFile)) {
     console.log('devtools css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (historyOverrideCss.includes(changedFile)) {
     console.log('history css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (newtabOverrideCss.includes(changedFile)) {
     console.log('newtab css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (optionsCss.includes(changedFile)) {
     console.log('options css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (popupCss.includes(changedFile)) {
     console.log('popup css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (backgroundPageHtml.includes(changedFile)) {
     console.log('background page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (bookmarksOverridePageHtml.includes(changedFile)) {
     console.log('bookmarks page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (devtoolsPageHtml.includes(changedFile)) {
     console.log('devtools page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (historyOverridePageHtml.includes(changedFile)) {
     console.log('history page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (newtabOverridePageHtml.includes(changedFile)) {
     console.log('mewtab page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (optionsPageHtml.includes(changedFile)) {
     console.log('options page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (popupPageHtml.includes(changedFile)) {
     console.log('popup page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   // Script defined in HTML files from manifest.json
   if (backgroundPageScript.includes(changedFile)) {
     console.log('background (from page) js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (bookmarksOverrideScript.includes(changedFile)) {
     console.log('bookmarks js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (devtoolsScript.includes(changedFile)) {
     console.log('devtools js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (historyOverrideScript.includes(changedFile)) {
     console.log('history js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (newtabOverrideScript.includes(changedFile)) {
     console.log('newtab js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (optionsScript.includes(changedFile)) {
     console.log('options js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
+
   if (popupScript.includes(changedFile)) {
     console.log('popup js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
   if (backgroundScript.includes(changedFile)) {
     console.log('background js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
   if (contentScript.includes(changedFile)) {
     console.log('content js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
-    // broadcastSocketMessage(wss, { status: 'fullExtensionReload' })
+    // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
-
-  // if (
+  // If (
   //   file + 'devtoolsscript' === watched.devtoolsScript ||
   //   file + 'devtoolscss' === watched.devtoolsCss ||
   //   file === watched.devtools
@@ -226,7 +234,7 @@ module.exports = async function (wss, extensionPath, changedFile) {
   //   // broadcastSocketMessage(wss, {
   //   //   status: 'tabReload',
   //   //   where: 'popup'
-  //   // })      
+  //   // })
   // }
 
   // // For changes within a webpage or special tab,

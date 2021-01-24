@@ -30,12 +30,13 @@ module.exports = async function (manifestPath) {
 
     if (input) {
       const [, source] = input
+
       patternsArray.push(source)
     }
   }
 
   // Do nothing for empty results
-  if (patternsArray.length == 0) return []
+  if (patternsArray.length === 0) return []
 
   return patternsArray
     .map(script => path

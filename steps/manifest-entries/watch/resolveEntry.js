@@ -2,6 +2,7 @@ const path = require('path')
 
 function resolveEntry (manifestPath, file) {
   if (!file) return null
+
   return path.resolve(path.dirname(manifestPath), file)
 }
 

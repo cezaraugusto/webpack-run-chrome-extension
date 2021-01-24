@@ -1,9 +1,10 @@
 const os = require('os')
 const path = require('path')
 
-const OpenChromeExtension = require('../module')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+
+const OpenChromeExtension = require('../module')
 
 module.exports = {
   cache: false,

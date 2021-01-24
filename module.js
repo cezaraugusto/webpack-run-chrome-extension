@@ -25,6 +25,7 @@ class RunChromeExtension {
 
     // Kickoff server
     const wss = serveSocket(this.port)
+
     // Generate the reload extension on the fly since
     // we can't tell what port is available before runtime.
     generateReloadExtension(this.port)
