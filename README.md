@@ -28,7 +28,7 @@ yarn demo
 ```
 
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/4672033/105642475-bae34b80-5e68-11eb-83ad-468701c6d837.gif' width='600' alt='npm start'>
+<img src='https://user-images.githubusercontent.com/4672033/105644192-e0755280-5e72-11eb-90bd-658224eb33c7.gif' width='600' alt='npm start'>
 </p>
 
 ## Usage
