@@ -1,10 +1,10 @@
-const bookmarksOverrideCssEntry = require('./bookmarksOverrideCss')
-const contentCssEntry = require('./contentCss')
-const devtoolsCssEntry = require('./devtoolsCss')
-const historyOverrideCssEntry = require('./historyOverrideCss')
-const newtabOverrideCssEntry = require('./newtabOverrideCss')
-const optionsCssEntry = require('./optionsCss')
-const popupCssEntry = require('./popupCss')
+const bookmarksOverrideCssEntry = require('./bookmarks')
+const contentCssEntry = require('./content')
+const devtoolsCssEntry = require('./devtools')
+const historyOverrideCssEntry = require('./history')
+const newtabOverrideCssEntry = require('./newtab')
+const optionsCssEntry = require('./options')
+const popupCssEntry = require('./popup')
 
 module.exports = async function (manifestPath) {
   return [

@@ -1,42 +1,31 @@
 const resolveManifest = require('../resolveManifest')
-const bookmarksOverrideCssEntry =
-  require('../generate/cssFromHtml/bookmarksOverrideCss')
-const contentCssEntry =
-  require('../generate/cssFromHtml/contentCss')
-const devtoolsCssEntry =
-  require('../generate/cssFromHtml/devtoolsCss')
-const historyOverrideCssEntry =
-  require('../generate/cssFromHtml/historyOverrideCss')
-const newtabOverrideCssEntry =
-  require('../generate/cssFromHtml/newtabOverrideCss')
-const optionsCssEntry = require('../generate/cssFromHtml/optionsCss')
-const popupCssEntry = require('../generate/cssFromHtml/popupCss')
-const backgroundPageHtmlEntry =
-  require('../generate/htmlFromManifest/backgroundPage')
-const bookmarksOverridePageHtmlEntry =
-  require('../generate/htmlFromManifest/bookmarksOverridePage')
-const devtoolsPageHtmlEntry =
-  require('../generate/htmlFromManifest/devtoolsPage')
-const historyOverridePageHtmlEntry =
-  require('../generate/htmlFromManifest/historyOverridePage')
-const newtabOverridePageHtmlEntry =
-  require('../generate/htmlFromManifest/newtabOverridePage')
-const optionsPageHtmlEntry =
-  require('../generate/htmlFromManifest/optionsPage')
-const popupPageHtmlEntry =
-  require('../generate/htmlFromManifest/popupPage')
-
-const backgroundPageScriptEntry = require('../generate/scriptFromHtml/backgroundPageScript')
-const bookmarksOverrideScriptEntry = require('../generate/scriptFromHtml/bookmarksOverrideScript')
-const devtoolsScriptEntry = require('../generate/scriptFromHtml/devtoolsScript')
-const historyOverrideScriptEntry = require('../generate/scriptFromHtml/historyOverrideScript')
-const newtabOverrideScriptEntry = require('../generate/scriptFromHtml/newtabOverrideScript')
-const optionsScriptEntry = require('../generate/scriptFromHtml/optionsScript')
-const popupScriptEntry = require('../generate/scriptFromHtml/popupScript')
-const backgroundScriptEntry =
-  require('../generate/scriptFromManifest/backgroundScript')
-const contentScriptEntry =
-  require('../generate/scriptFromManifest/contentScript')
+// CSS sources coming from HTML pages defined in manifest.json
+const bookmarksCssEntry = require('../generate/cssFromHtml/bookmarks')
+const contentCssEntry = require('../generate/cssFromHtml/content')
+const devtoolsCssEntry = require('../generate/cssFromHtml/devtools')
+const historyCssEntry = require('../generate/cssFromHtml/history')
+const newtabCssEntry = require('../generate/cssFromHtml/newtab')
+const optionsCssEntry = require('../generate/cssFromHtml/options')
+const popupCssEntry = require('../generate/cssFromHtml/popup')
+// HTML pages defined in manifest.json
+const backgroundEntry = require('../generate/htmlFromManifest/backgroundPage')
+const bookmarksEntry = require('../generate/htmlFromManifest/bookmarks')
+const devtoolsEntry = require('../generate/htmlFromManifest/devtools')
+const historyEntry = require('../generate/htmlFromManifest/history')
+const newtabEntry = require('../generate/htmlFromManifest/newtab')
+const optionsEntry = require('../generate/htmlFromManifest/options')
+const popupEntry = require('../generate/htmlFromManifest/popup')
+// Script sources coming from HTML pages defined in manifest.json
+const bgPageScriptEntry = require('../generate/scriptFromHtml/backgroundPage')
+const bookmarksScriptEntry = require('../generate/scriptFromHtml/bookmarks')
+const devtoolsScriptEntry = require('../generate/scriptFromHtml/devtools')
+const historyScriptEntry = require('../generate/scriptFromHtml/history')
+const newtabScriptEntry = require('../generate/scriptFromHtml/newtab')
+const optionsScriptEntry = require('../generate/scriptFromHtml/options')
+const popupScriptEntry = require('../generate/scriptFromHtml/popup')
+// Script sources defined in manifest.json
+const bgScriptEntry = require('../generate/scriptFromManifest/background')
+const contentScriptEntry = require('../generate/scriptFromManifest/content')
 
 // Const broadcastSocketMessage = require('../broadcastSocketMessage')
 
@@ -45,34 +34,34 @@ module.exports = async function (wss, extensionPath, changedFile) {
 
   const manifestPath = resolveManifest(extensionPath)
   // CSS defined in HTML files from manifest.json
-  const bookmarksOverrideCss = await bookmarksOverrideCssEntry(manifestPath)
+  const bookmarksCss = await bookmarksCssEntry(manifestPath)
   const contentCss = await contentCssEntry(manifestPath)
   const devtoolsCss = await devtoolsCssEntry(manifestPath)
-  const historyOverrideCss = await historyOverrideCssEntry(manifestPath)
-  const newtabOverrideCss = await newtabOverrideCssEntry(manifestPath)
+  const historyCss = await historyCssEntry(manifestPath)
+  const newtabCss = await newtabCssEntry(manifestPath)
   const optionsCss = await optionsCssEntry(manifestPath)
   const popupCss = await popupCssEntry(manifestPath)
   // HTML defined in manifest.json
-  const backgroundPageHtml = backgroundPageHtmlEntry(manifestPath)
-  const bookmarksOverridePageHtml = bookmarksOverridePageHtmlEntry(manifestPath)
-  const devtoolsPageHtml = devtoolsPageHtmlEntry(manifestPath)
-  const historyOverridePageHtml = historyOverridePageHtmlEntry(manifestPath)
-  const newtabOverridePageHtml = newtabOverridePageHtmlEntry(manifestPath)
-  const optionsPageHtml = optionsPageHtmlEntry(manifestPath)
-  const popupPageHtml = popupPageHtmlEntry(manifestPath)
+  const backgroundHtml = backgroundEntry(manifestPath)
+  const bookmarksHtml = bookmarksEntry(manifestPath)
+  const devtoolsHtml = devtoolsEntry(manifestPath)
+  const historyHtml = historyEntry(manifestPath)
+  const newtabHtml = newtabEntry(manifestPath)
+  const optionsHtml = optionsEntry(manifestPath)
+  const popupHtml = popupEntry(manifestPath)
   // Script defined in HTML files from manifest.json
-  const backgroundPageScript = await backgroundPageScriptEntry(manifestPath)
-  const bookmarksOverrideScript = await bookmarksOverrideScriptEntry(manifestPath)
+  const bgPageScript = await bgPageScriptEntry(manifestPath)
+  const bookmarksScript = await bookmarksScriptEntry(manifestPath)
   const devtoolsScript = await devtoolsScriptEntry(manifestPath)
-  const historyOverrideScript = await historyOverrideScriptEntry(manifestPath)
-  const newtabOverrideScript = await newtabOverrideScriptEntry(manifestPath)
+  const historyScript = await historyScriptEntry(manifestPath)
+  const newtabScript = await newtabScriptEntry(manifestPath)
   const optionsScript = await optionsScriptEntry(manifestPath)
   const popupScript = await popupScriptEntry(manifestPath)
   // Scripts defined in manifest.json
-  const backgroundScript = backgroundScriptEntry(manifestPath)
+  const backgroundScript = bgScriptEntry(manifestPath)
   const contentScript = contentScriptEntry(manifestPath)
 
-  if (bookmarksOverrideCss.includes(changedFile)) {
+  if (bookmarksCss.includes(changedFile)) {
     console.log('bookmarks css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
     // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
@@ -87,12 +76,12 @@ module.exports = async function (wss, extensionPath, changedFile) {
     // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
-  if (historyOverrideCss.includes(changedFile)) {
+  if (historyCss.includes(changedFile)) {
     console.log('history css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
     // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
-  if (newtabOverrideCss.includes(changedFile)) {
+  if (newtabCss.includes(changedFile)) {
     console.log('newtab css 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
     // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
@@ -107,40 +96,40 @@ module.exports = async function (wss, extensionPath, changedFile) {
     // BroadcastSocketMessage(wss, { status: 'fullExtensionReload' })
   }
 
-  if (backgroundPageHtml.includes(changedFile)) {
+  if (backgroundHtml.includes(changedFile)) {
     console.log('background page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (bookmarksOverridePageHtml.includes(changedFile)) {
+  if (bookmarksHtml.includes(changedFile)) {
     console.log('bookmarks page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (devtoolsPageHtml.includes(changedFile)) {
+  if (devtoolsHtml.includes(changedFile)) {
     console.log('devtools page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (historyOverridePageHtml.includes(changedFile)) {
+  if (historyHtml.includes(changedFile)) {
     console.log('history page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (newtabOverridePageHtml.includes(changedFile)) {
+  if (newtabHtml.includes(changedFile)) {
     console.log('mewtab page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (optionsPageHtml.includes(changedFile)) {
+  if (optionsHtml.includes(changedFile)) {
     console.log('options page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (popupPageHtml.includes(changedFile)) {
+  if (popupHtml.includes(changedFile)) {
     console.log('popup page 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
   // Script defined in HTML files from manifest.json
-  if (backgroundPageScript.includes(changedFile)) {
+  if (bgPageScript.includes(changedFile)) {
     console.log('background (from page) js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (bookmarksOverrideScript.includes(changedFile)) {
+  if (bookmarksScript.includes(changedFile)) {
     console.log('bookmarks js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
@@ -148,11 +137,11 @@ module.exports = async function (wss, extensionPath, changedFile) {
     console.log('devtools js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (historyOverrideScript.includes(changedFile)) {
+  if (historyScript.includes(changedFile)) {
     console.log('history js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
-  if (newtabOverrideScript.includes(changedFile)) {
+  if (newtabScript.includes(changedFile)) {
     console.log('newtab js 🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹')
   }
 
@@ -185,9 +174,9 @@ module.exports = async function (wss, extensionPath, changedFile) {
 
   // // For within a given tab, reload the given tab
   // if (
-  //   file + '_bookmarksscript' === watched.bookmarksOverrideScript ||
-  //   file + '_bookmarkscss' === watched.bookmarksOverrideCss ||
-  //   file === watched.bookmarksOverride
+  //   file + '_bookmarksscript' === watched.bookmarksScript ||
+  //   file + '_bookmarkscss' === watched.bookmarksCss ||
+  //   file === watched.bookmarks
   // ) {
   //   // tentar window.location.href
   //   console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹 BOOKMARKS', file)
@@ -199,9 +188,9 @@ module.exports = async function (wss, extensionPath, changedFile) {
   // }
 
   // if (
-  //   file + '_historyscript' === watched.historyOverrideScript ||
-  //   file + '_historycss' === watched.historyOverrideCss ||
-  //   file === watched.historyOverride
+  //   file + '_historyscript' === watched.historyScript ||
+  //   file + '_historycss' === watched.historyCss ||
+  //   file === watched.history
   // ) {
   //   console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹 HISTORY', file)
   //   // broadcastSocketMessage(wss, {
@@ -211,9 +200,9 @@ module.exports = async function (wss, extensionPath, changedFile) {
   // }
 
   // if (
-  //   file + '_newtabscript' === watched.newtabOverrideScript ||
-  //   file + '_newtabcss' === watched.newtabOverrideCss ||
-  //   file === watched.newtabOverride
+  //   file + '_newtabscript' === watched.newtabScript ||
+  //   file + '_newtabcss' === watched.newtabCss ||
+  //   file === watched.newtab
   // ) {
   //   console.log('🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹 NTP', file)
   //   // broadcastSocketMessage(wss, {

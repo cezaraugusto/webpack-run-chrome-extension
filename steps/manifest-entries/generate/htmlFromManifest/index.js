@@ -1,10 +1,10 @@
 const backgroundPageHTMLEntry = require('./backgroundPage')
-const bookmarksOverridePageHTMLEntry = require('./bookmarksOverridePage')
-const devtoolsPageHTMLEntry = require('./devtoolsPage')
-const historyOverridePageHTMLEntry = require('./historyOverridePage')
-const newtabOverridePageHTMLEntry = require('./newtabOverridePage')
-const optionsPageHTMLEntry = require('./optionsPage')
-const popupPageHTMLEntry = require('./popupPage')
+const bookmarksOverridePageHTMLEntry = require('./bookmarks')
+const devtoolsPageHTMLEntry = require('./devtools')
+const historyOverridePageHTMLEntry = require('./history')
+const newtabOverridePageHTMLEntry = require('./newtab')
+const optionsPageHTMLEntry = require('./options')
+const popupPageHTMLEntry = require('./popup')
 
 module.exports = function (extensionPath) {
   return [

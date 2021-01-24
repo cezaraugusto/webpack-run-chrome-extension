@@ -104,11 +104,14 @@ async function reloadAllExtensions () {
 }
 
 function reloadPage () {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (arrayOfTabs) {
-    const code = 'window.location.reload();'
+  chrome.tabs.query(
+    { active: true, currentWindow: true },
+    (arrayOfTabs) => {
+      const code = 'window.location.reload();'
 
-    chrome.tabs.executeScript(arrayOfTabs[0].id, { code })
-  })
+      chrome.tabs.executeScript(arrayOfTabs[0].id, { code })
+    }
+  )
 }
 
 async function reloadTab () {

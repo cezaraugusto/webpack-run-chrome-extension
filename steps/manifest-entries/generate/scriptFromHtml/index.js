@@ -1,10 +1,10 @@
-const backgroundPageScriptEntry = require('./backgroundPageScript')
-const bookmarksOverrideScriptEntry = require('./bookmarksOverrideScript')
-const devtoolsScriptEntry = require('./devtoolsScript')
-const historyOverrideScriptEntry = require('./historyOverrideScript')
-const newtabOverrideScriptEntry = require('./newtabOverrideScript')
-const optionsScriptEntry = require('./optionsScript')
-const popupScriptEntry = require('./popupScript')
+const backgroundPageScriptEntry = require('./backgroundPage')
+const bookmarksOverrideScriptEntry = require('./bookmarks')
+const devtoolsScriptEntry = require('./devtools')
+const historyOverrideScriptEntry = require('./history')
+const newtabOverrideScriptEntry = require('./newtab')
+const optionsScriptEntry = require('./options')
+const popupScriptEntry = require('./popup')
 
 module.exports = async function (manifestPath) {
   return [

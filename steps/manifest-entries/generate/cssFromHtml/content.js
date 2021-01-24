@@ -1,6 +1,6 @@
 const path = require('path')
 
-module.exports = async function (manifestPath) {
+module.exports = function (manifestPath) {
   const manifest = require(manifestPath)
 
   if (

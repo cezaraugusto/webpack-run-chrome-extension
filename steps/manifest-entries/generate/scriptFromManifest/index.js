@@ -1,5 +1,5 @@
-const backgroundScriptEntry = require('./backgroundScript')
-const contentScriptEntry = require('./contentScript')
+const backgroundScriptEntry = require('./background')
+const contentScriptEntry = require('./content')
 
 module.exports = function (manifestPath) {
   return [
