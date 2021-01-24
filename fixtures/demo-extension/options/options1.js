@@ -1,1 +1,1 @@
-console.log('2options script loaded2')
+console.log('options script loaded')

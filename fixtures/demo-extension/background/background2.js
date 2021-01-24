@@ -1,1 +1,1 @@
-console.log('22background script loaded')
+console.log('background script (number 2) loaded')

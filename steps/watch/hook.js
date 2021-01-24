@@ -1,4 +1,4 @@
-const watchService = require('./watch-service')
+const messenger = require('./messenger')
 
 module.exports = function (compiler, wss, extensionPath) {
   return compiler.hooks.watchRun.tapAsync(
@@ -7,7 +7,7 @@ module.exports = function (compiler, wss, extensionPath) {
       const files = compilation.modifiedFiles || new Set()
       const changedFile = files.values().next().value
 
-      watchService(wss, extensionPath, changedFile)
+      messenger(wss, extensionPath, changedFile)
       done()
     }
   )

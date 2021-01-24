@@ -24,7 +24,8 @@ ws.onmessage = async (event) => {
   }
 
   if (message.status === 'tabReload') {
-    await reloadTab()
+    // await reloadTab()
+    // reloadPage()
     ws.send(JSON.stringify({ status: 'tabReloaded' }))
   }
 
@@ -100,6 +101,13 @@ async function reloadAllExtensions () {
     .map(extension => reloadExtension(extension.id))
 
   await Promise.all(reloadAll)
+}
+
+function reloadPage () {
+  chrome.tabs.query({active: true, currentWindow: true}, function (arrayOfTabs) {
+    var code = 'window.location.reload();';
+    chrome.tabs.executeScript(arrayOfTabs[0].id, {code: code});
+  })
 }
 
 async function reloadTab () {
