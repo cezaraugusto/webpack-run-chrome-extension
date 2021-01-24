@@ -116,17 +116,6 @@ async function reloadAllExtensions () {
   await Promise.all(reloadAll)
 }
 
-// Function reloadPage () {
-//   chrome.tabs.query(
-//     { active: true, currentWindow: true },
-//     (arrayOfTabs) => {
-//       const code = 'chrome.runtime.reload();console.log("made it!!!");'
-
-//       chrome.tabs.executeScript(arrayOfTabs[0].id, { code })
-//     }
-//   )
-// }
-
 async function reloadTab () {
   await new Promise((resolve) => {
     return chrome.tabs.getCurrent(tab => {
