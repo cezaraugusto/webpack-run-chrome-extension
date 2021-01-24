@@ -24,8 +24,9 @@
   "files": [
     "module.js",
     "browser.config.js",
-    "steps",
-    "manager-extension"
+    "messages.js",
+    "steps/",
+    "manager-extension/"
   ],
   "keywords": [
     "webpack",
