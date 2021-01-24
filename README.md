@@ -6,16 +6,16 @@
 
 <img src="https://user-images.githubusercontent.com/4672033/103182804-f2bc9a80-488c-11eb-936d-efa5474e384f.png" align=right height=180>
 
-> Run your extension on Chrome with auto-reload support
+> Run your browser extension on Chrome with zero-config auto-reload support
 
-Opens up a new Chrome browser window with an extension loaded. This plugin accepts all flags Chrome does (see [browserFlags](#browserFlags)) and loads on a clean profile by default. The browser loads the extension pragmatically in developer mode with live-reload support for JavaScript changes.
+Opens up a new Chrome instance with an extension loaded. Resources declared in manifest.json are auto-reloaded by default, including JavaScript and CSS declared in Manifest HTML pages. This plugin accepts all flags Chrome does (see [browserFlags](#browserFlags)) and loads on a clean profile by default.
 
 ## Highlights
 
-* Zero-config auto-reload. (customizable)
+* Zero-config auto-reload for [virtually everything](https://github.com/cezaraugusto/webpack-run-chrome-extension/issues/4) including all HTML overrides, and every resource you plan to require via `<script>` and `<link>` in manifest declared HTML pages.
 * Fresh profile with developer mode enabled by default on every run. (customizable)
 * Opens the handy "chrome://extensions" by default for fast debugging.
-* Uses the system browser instead of fully downloading Chrome (!!). (accepts Canary builds)
+* Uses the system browser instead of fully downloading Chrome. (accepts Canary builds)
 * Closing the webpack process instantly kills all child processes. No extra steps to open/close Chrome.
 * Supports [virtually all Chrome flags](https://peter.sh/experiments/chromium-command-line-switches/).
 
@@ -28,7 +28,7 @@ yarn demo
 ```
 
 <p align='center'>
-<img src='https://user-images.githubusercontent.com/4672033/103184014-96f60f80-4894-11eb-8c99-04fb1c5ce086.gif' width='600' alt='npm start'>
+<img src='https://user-images.githubusercontent.com/4672033/105642475-bae34b80-5e68-11eb-83ad-468701c6d837.gif' width='600' alt='npm start'>
 </p>
 
 ## Usage
