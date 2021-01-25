@@ -12,20 +12,6 @@ jest.mock('./steps/manifest-entries/watch/createUserDataDir')
 
 describe('webpack-run-chrome-extension', () => {
   describe('webpack config', () => {
-    it('calls plugin with correct args', (done) => {
-      webpack(webpackConfig, (error, stats) => {
-        if (error) console.error(error)
-        if (stats.hasErrors()) console.log(stats.toString())
-
-        // Webpack config calls plugin
-        const configArgs = RunChromeExtension.mock.calls[0][0]
-
-        expect(RunChromeExtension).toBeCalledTimes(1)
-        expect(RunChromeExtension).toBeCalledWith(configArgs)
-        done()
-      })
-    })
-
     describe('serveExtension', () => {
       let spy
 
