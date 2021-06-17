@@ -3,7 +3,7 @@ const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
 const generateWatchEntriesHook = require('./steps/manifest-entries/generate/hook')
 const watchFileChangesHook = require('./steps/manifest-entries/watch/hook')
-const serveExtension = require('./steps/serveExtension')
+const {serveExtensionHook} = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server
 // watched by webpack that connects to an extension
@@ -40,7 +40,7 @@ class RunChromeExtension {
     // the manager extension setup and the client extension
     // with key files being watched.
     // Now we inject these two extensions into the browser.
-    serveExtension(this)
+    serveExtensionHook(compiler, this)
   }
 }
 

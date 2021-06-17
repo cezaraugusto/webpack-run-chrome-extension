@@ -12,7 +12,7 @@ process.on('SIGTERM', async () => {
 
 process.on('unhandledRejection', (error) => { throw error })
 
-module.exports = async function (self = {}) {
+async function launchChrome (options = {}) {
   const defaultFlags = ChromeLauncher
     .Launcher.defaultFlags()
     .filter(flag => flag !== '--disable-extensions')
@@ -20,14 +20,24 @@ module.exports = async function (self = {}) {
   // Get user defaults so we can set the browser flags
   const browserConfigOptions = {
     defaultFlags: defaultFlags || [],
-    browserFlags: self.browserFlags || [],
-    userDataDir: self.userDataDir || await createUserDataDir(),
-    startingUrl: self.startingUrl,
-    autoReload: self.autoReload || true
+    browserFlags: options.browserFlags || [],
+    userDataDir: options.userDataDir || await createUserDataDir(),
+    startingUrl: options.startingUrl,
+    autoReload: options.autoReload || true
   }
 
   // Set user defaults to browser
-  const chromeConfig = browserConfig(self.extensionPath, browserConfigOptions)
+  const chromeConfig = browserConfig(options.extensionPath, browserConfigOptions)
 
   await ChromeLauncher.launch(chromeConfig)
 }
+
+function serveExtensionHook (compiler, options) {
+  return compiler
+    .hooks.done.tapAsync('open-chrome-extension', async (_, done) => {
+      await launchChrome(options)
+      done()
+  })
+}
+
+module.exports = {launchChrome, serveExtensionHook}
