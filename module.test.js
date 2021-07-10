@@ -3,7 +3,7 @@ const ChromeLauncher = require('chrome-launcher')
 
 const {launchChrome} = require('./steps/serveExtension')
 
-jest.mock('./steps/manifest-entries/watch/createUserDataDir')
+jest.mock('./steps/messaging/createUserDataDir')
 
 describe('webpack-run-chrome-extension', () => {
   describe('webpack config', () => {

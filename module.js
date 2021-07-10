@@ -1,8 +1,8 @@
 const resolvePort = require('./steps/resolvePort')
 const serveSocket = require('./steps/serveSocket')
 const generateReloadExtension = require('./steps/generateReloadExtension')
-const generateWatchEntriesHook = require('./steps/manifest-entries/generate/hook')
-const watchFileChangesHook = require('./steps/manifest-entries/watch/hook')
+const watchEntriesHook = require('./steps/watchEntriesHook')
+const messagingHook = require('./steps/messaging/hook')
 const {serveExtensionHook} = require('./steps/serveExtension')
 
 // The plugin works by opening a Node websocket server
@@ -16,7 +16,7 @@ class RunChromeExtension {
     this.browserFlags = options.browserFlags
     this.userDataDir = options.userDataDir
     this.startingUrl = options.startingUrl
-    this.autoReload = options.autoReload
+    this.autoReload = options.autoReload || true
   }
 
   apply (compiler) {
@@ -31,11 +31,11 @@ class RunChromeExtension {
     generateReloadExtension(this.port)
     // Generate watch files from manifest entries and
     // JS/CSS files defined in HTML files also from the manifest.
-    generateWatchEntriesHook(compiler, this.extensionPath)
+    if (this.autoReload) watchEntriesHook(compiler, this.extensionPath)
     // Actually watch changes This will trigger different
     // reload strategies based on the manifest field the
     // file is included. See the method itself for info.
-    watchFileChangesHook(compiler, wss, this.extensionPath)
+    messagingHook(compiler, wss, this.extensionPath)
     // Serve the extension to the browser. At this point
     // the manager extension setup and the client extension
     // with key files being watched.

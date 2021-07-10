@@ -1,7 +1,7 @@
 const ChromeLauncher = require('chrome-launcher')
 
 const browserConfig = require('../browser.config')
-const createUserDataDir = require('./manifest-entries/watch/createUserDataDir')
+const createUserDataDir = require('./messaging/createUserDataDir')
 
 process.on('SIGINT', async () => {
   await ChromeLauncher.killAll()

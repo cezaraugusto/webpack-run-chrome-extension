@@ -52,6 +52,7 @@
     "chrome-launcher": "^0.13.4",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.1",
+    "extension-manifest-assets": "^0.1.0",
     "fs-extra": "^9.0.1",
     "html-webpack-plugin": "^5.0.0-beta.2",
     "line-reader": "^0.4.0",

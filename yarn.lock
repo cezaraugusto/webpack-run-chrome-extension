@@ -1847,6 +1847,11 @@ extend@~3.0.2:
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
 
+extension-manifest-assets@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/extension-manifest-assets/-/extension-manifest-assets-0.1.0.tgz#0834bec062036d353a3625a56e61b5c287e5308a"
+  integrity sha512-4yvQGis6eq6MN7O7jc1jIRRqywidjb2dZHhkc14ybQZsrdb3M3v43XoUR06vcwwBk4W+P25biuZyIV8KpKu5jg==
+
 extglob@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/extglob/-/extglob-2.0.4.tgz#ad00fe4dc612a9232e8718711dc5cb5ab0285543"
