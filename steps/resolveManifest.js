@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 
-const messages = require('../../messages')
+const messages = require('../messages')
 
 module.exports = function (workingDir) {
   let manifestFilePath

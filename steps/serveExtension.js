@@ -34,7 +34,7 @@ async function launchChrome (options = {}) {
 
 function serveExtensionHook (compiler, options) {
   return compiler
-    .hooks.done.tapAsync('open-chrome-extension', async (_, done) => {
+    .hooks.done.tapAsync('run-chrome-extension', async (_, done) => {
       await launchChrome(options)
       done()
   })

@@ -1,9 +1,9 @@
-const resolveManifest = require('./manifest-entries/resolveManifest')
+const resolveManifest = require('./resolveManifest')
 const extensionManifestAssets = require('extension-manifest-assets')
 
 module.exports = function (compiler, extensionPath) {
   return compiler.hooks.afterCompile.tapAsync(
-    'open-chrome-extension',
+    'run-chrome-extension',
     async (compilation, done) => {
       const manifestPath = resolveManifest(extensionPath)
       const entries = await extensionManifestAssets(manifestPath)
