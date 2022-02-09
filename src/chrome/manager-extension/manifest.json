@@ -3,7 +3,7 @@
   "version": "1.0",
   "manifest_version": 2,
   "background": {
-    "scripts": ["reloadService.js", "initialTab.js"]
+    "scripts": ["initialTab.js", "reloadService.js"]
   },
   "permissions": ["management", "tabs"]
 }

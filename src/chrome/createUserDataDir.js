@@ -7,8 +7,6 @@ const os = require('os')
 
 const fs = require('fs-extra')
 
-process.on('unhandledRejection', (error) => { throw error })
-
 async function createTempDirectory () {
   const userDataDir = path
     .resolve(os.tmpdir(), 'webpack-run-chrome-extension')

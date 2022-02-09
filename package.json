@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:fixture": "webpack --watch --config='./fixtures/webpack.config.js'",
+    "test:fixture": "webpack --config='./fixtures/webpack.config.js'",
     "demo": "yarn test:fixture"
   },
   "files": [

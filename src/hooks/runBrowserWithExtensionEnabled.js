@@ -1,7 +1,8 @@
 const ChromeLauncher = require('chrome-launcher')
 
-const browserConfig = require('../browser.config')
-const createUserDataDir = require('./messaging/createUserDataDir')
+const browserConfig = require('../chrome/browser.config')
+const createUserDataDir = require('../chrome/createUserDataDir')
+const generateReloadExtension = require('../chrome/generateReloadExtension')
 
 process.on('SIGINT', async () => {
   await ChromeLauncher.killAll()
@@ -10,9 +11,9 @@ process.on('SIGTERM', async () => {
   await ChromeLauncher.killAll()
 })
 
-process.on('unhandledRejection', (error) => { throw error })
-
 async function launchChrome (options = {}) {
+  generateReloadExtension(options.port)
+
   const defaultFlags = ChromeLauncher
     .Launcher.defaultFlags()
     .filter(flag => flag !== '--disable-extensions')
@@ -32,12 +33,12 @@ async function launchChrome (options = {}) {
   await ChromeLauncher.launch(chromeConfig)
 }
 
-function serveExtensionHook (compiler, options) {
-  return compiler
-    .hooks.done.tapAsync('run-chrome-extension', async (_, done) => {
-      await launchChrome(options)
-      done()
-  })
+function runBrowserWithExtensionEnabled (compiler, options) {
+  // return compiler
+  //   .hooks.done.tapAsync('run-chrome-extension', async (_, done) => {
+    launchChrome(options)
+  //     done()
+  // })
 }
 
-module.exports = {launchChrome, serveExtensionHook}
+module.exports = {launchChrome, runBrowserWithExtensionEnabled}

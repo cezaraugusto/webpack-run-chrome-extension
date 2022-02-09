@@ -1,13 +1,13 @@
-const messenger = require('./messenger')
+const messageProvider = require('../webSocketServer/messageDispatcher')
 
-module.exports = function (compiler, wss, extensionPath) {
+module.exports = function (server, compiler, extensionPath) {
   return compiler.hooks.watchRun.tapAsync(
     'open-chrome-extension',
     (compilation, done) => {
       const files = compilation.modifiedFiles || new Set()
       const changedFile = files.values().next().value
 
-      messenger(wss, extensionPath, changedFile)
+      messageProvider(server, extensionPath, changedFile)
       done()
     }
   )

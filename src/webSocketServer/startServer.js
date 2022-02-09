@@ -1,7 +1,5 @@
 const WebSocket = require('ws')
 
-process.on('unhandledRejection', (error) => { throw error })
-
 module.exports = function (port) {
   const webSocketServer = new WebSocket.Server({ host: 'localhost', port })
 
