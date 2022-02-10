@@ -7,12 +7,12 @@ const os = require('os')
 
 const fs = require('fs-extra')
 
-async function createTempDirectory () {
+function createTempDirectory () {
   const userDataDir = path
     .resolve(os.tmpdir(), 'webpack-run-chrome-extension')
 
   try {
-    await fs.mkdir(userDataDir)
+    fs.mkdirSync(userDataDir)
 
     return userDataDir
   } catch (error) {
@@ -25,8 +25,8 @@ async function createTempDirectory () {
   }
 }
 
-module.exports = async function () {
-  const userDataDir = await createTempDirectory()
+module.exports = function () {
+  const userDataDir = createTempDirectory()
 
   const userProfile = JSON.stringify({
     extensions: {
@@ -39,12 +39,12 @@ module.exports = async function () {
   const preferences = path
     .join(userDataDir, 'Default')
 
-  await fs.ensureDir(preferences)
+  fs.ensureDirSync(preferences)
 
   const preferencesPath = path.join(preferences, 'Preferences')
 
   // Actually write the user preferences
-  await fs.writeFile(preferencesPath, userProfile, 'utf8')
+  fs.writeFileSync(preferencesPath, userProfile, 'utf8')
 
   return userDataDir
 }

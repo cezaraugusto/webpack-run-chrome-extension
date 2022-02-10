@@ -7,8 +7,7 @@ module.exports = function (compiler, extensionPath) {
     async (compilation, done) => {
       const manifestPath = resolveManifest(extensionPath)
       const entries = await extensionManifestAssets(manifestPath)
-      // console.log({all: entries.all})
-      // console.log({filedeps: compilation.fileDependencies})
+
       entries.all.forEach(path => compilation.fileDependencies.add(path))
       done()
     }

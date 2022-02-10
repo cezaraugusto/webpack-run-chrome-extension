@@ -26,6 +26,7 @@ class RunChromeExtension {
 
     // Kickoff server
     const wss = startServer(this.port)
+
     // Generate watch files from manifest entries and
     // JS/CSS files defined in HTML files also from the manifest.
     if (this.autoReload) watchManifestFields(compiler, this.extensionPath)

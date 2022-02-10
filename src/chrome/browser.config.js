@@ -7,34 +7,20 @@ module.exports = (extensionDistPath, configOptions) => {
 
   if (!configOptions) {
     options = {
-      defaultFlags: [],
-      browserFlags: [],
       userDataDir: null,
-      startingUrl: null,
-      autoReload: true
+      browserFlags: [],
     }
   }
 
-  const extensionsToLoad = []
+  const extensionsToLoad = [extensionDistPath, reloadExtension]
 
-  if (options.autoReload) {
-    extensionsToLoad.push(reloadExtension)
-  }
-
-  extensionsToLoad.push(extensionDistPath)
-
-  return {
-    ignoreDefaultFlags: true,
-    userDataDir: options.userDataDir,
-    startingUrl: options.startingUrl,
-    // Flags set by default:
-    // https://github.com/GoogleChrome/chrome-launcher/blob/master/src/flags.ts
+  // Flags set by default:
+  // https://github.com/GoogleChrome/chrome-launcher/blob/master/src/flags.ts
+  return [
+    `--load-extension=${extensionsToLoad.join()}`,
+    `--user-data-dir=${options.userDataDir}`,
     // Flags to pass to Chrome
     // Any of http://peter.sh/experiments/chromium-command-line-switches/
-    chromeFlags: [
-      ...options.defaultFlags,
-      `--load-extension=${extensionsToLoad.join()}`,
-      ...options.browserFlags
-    ]
-  }
+    ...options.browserFlags.join(' ')
+  ].join(' ')
 }

@@ -1,44 +1,59 @@
-const ChromeLauncher = require('chrome-launcher')
+const path = require('path')
+const { exec } = require('child_process')
+const chrome = require('chrome-location')
 
 const browserConfig = require('../chrome/browser.config')
 const createUserDataDir = require('../chrome/createUserDataDir')
 const generateReloadExtension = require('../chrome/generateReloadExtension')
 
-process.on('SIGINT', async () => {
-  await ChromeLauncher.killAll()
+// TODO: check if still needed
+process.on('SIGINT', () => {
+  process.exit()
 })
-process.on('SIGTERM', async () => {
-  await ChromeLauncher.killAll()
+
+process.on('SIGTERM', () => {
+  process.exit()
 })
 
 async function launchChrome (options = {}) {
   generateReloadExtension(options.port)
 
-  const defaultFlags = ChromeLauncher
-    .Launcher.defaultFlags()
-    .filter(flag => flag !== '--disable-extensions')
-
   // Get user defaults so we can set the browser flags
   const browserConfigOptions = {
-    defaultFlags: defaultFlags || [],
     browserFlags: options.browserFlags || [],
-    userDataDir: options.userDataDir || await createUserDataDir(),
-    startingUrl: options.startingUrl,
-    autoReload: options.autoReload || true
+    userDataDir: options.userDataDir || createUserDataDir()
   }
 
   // Set user defaults to browser
   const chromeConfig = browserConfig(options.extensionPath, browserConfigOptions)
+  const cmd = `"${chrome}" ${chromeConfig}`
 
-  await ChromeLauncher.launch(chromeConfig)
+  return new Promise(() => {
+    const child = exec(cmd, (error, stdout, stderr) => {
+      if (error) throw error
+      if (stderr.includes('Unable to move the cache')) {
+        console.log(`[Chrome Extension Launcher] Chrome instance already running`)
+      } else {
+        console.log('[Chrome Extension Launcher] Chrome instance exited')
+        process.exit()
+      }
+    })
+    child.stdout.pipe(process.stdout)
+    child.stderr.pipe(process.stderr)
+  })
 }
 
+let chromeDidLaunch = false
+
 function runBrowserWithExtensionEnabled (compiler, options) {
-  // return compiler
-  //   .hooks.done.tapAsync('run-chrome-extension', async (_, done) => {
+  
+  return compiler
+  .hooks.afterEmit.tapAsync('run-chrome-extension', (_, done) => {
+    if (chromeDidLaunch) return done()
     launchChrome(options)
-  //     done()
-  // })
+    chromeDidLaunch = true
+    done()
+  })
 }
 
 module.exports = {launchChrome, runBrowserWithExtensionEnabled}

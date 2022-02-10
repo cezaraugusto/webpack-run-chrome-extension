@@ -1,8 +1,16 @@
+const path = require('path')
 const WebSocket = require('ws')
 const resolveManifest = require('../resolvers/resolveManifest')
 const extensionManifestAssets = require('extension-manifest-assets')
 
-process.on('unhandledRejection', (error) => { throw error })
+function getChangedFilePath (extensionPath, fileName) {
+  const extensionName = path.basename(extensionPath)
+  const index = fileName
+    .split('/')
+    .findIndex((data) => data === extensionName)
+
+  return fileName.split('/').slice(index).join('/')
+}
 
 function dispatchMessage (server, message) {
   server.clients.forEach((client) => {
@@ -12,16 +20,17 @@ function dispatchMessage (server, message) {
   })
 }
 
-module.exports = async function (server, extensionPath, changedFile) {
-  if (!changedFile) return
+module.exports = async function (server, extensionPath, updatedFile) {
+  if (!updatedFile) return
 
   const manifestPath = resolveManifest(extensionPath)
+  const updatedHtmlFile = (htmlFile) => getChangedFilePath(extensionPath, htmlFile)
   const {features} = await extensionManifestAssets(manifestPath)
 
   if (
-    features.bookmarks.html === changedFile ||
-    features.bookmarks.css.includes(changedFile) ||
-    features.bookmarks.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.bookmarks.html) ||
+    features.bookmarks.css.includes(updatedFile) ||
+    features.bookmarks.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
       status: 'reloadEverything',
@@ -30,8 +39,8 @@ module.exports = async function (server, extensionPath, changedFile) {
   }
 
   if (
-    features.content.css.includes(changedFile) ||
-    features.content.scripts.includes(changedFile)
+    features.content.css.includes(updatedFile) ||
+    features.content.scripts.includes(updatedFile)
   ) {
     dispatchMessage(server, {
       status: 'reloadEverything',
@@ -40,18 +49,18 @@ module.exports = async function (server, extensionPath, changedFile) {
   }
 
   if (
-    features.devtools.html === changedFile ||
-    features.devtools.css.includes(changedFile) ||
-    features.devtools.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.devtools.html) ||
+    features.devtools.css.includes(updatedFile) ||
+    features.devtools.js.includes(updatedFile)
   ) {
     // TODO: this doesn't work
     dispatchMessage(server, { status: 'devtoolsReload' })
   }
 
   if (
-    features.history.html === changedFile ||
-    features.history.css.includes(changedFile) ||
-    features.history.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.history.html) ||
+    features.history.css.includes(updatedFile) ||
+    features.history.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
       status: 'reloadEverything',
@@ -60,9 +69,9 @@ module.exports = async function (server, extensionPath, changedFile) {
   }
 
   if (
-    features.newtab.html === changedFile ||
-    features.newtab.css.includes(changedFile) ||
-    features.newtab.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.newtab.html) ||
+    features.newtab.css.includes(updatedFile) ||
+    features.newtab.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
       status: 'reloadEverything',
@@ -71,9 +80,9 @@ module.exports = async function (server, extensionPath, changedFile) {
   }
 
   if (
-    features.options.html === changedFile ||
-    features.options.css.includes(changedFile) ||
-    features.options.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.options.html) ||
+    features.options.css.includes(updatedFile) ||
+    features.options.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
       status: 'reloadEverything',
@@ -82,9 +91,9 @@ module.exports = async function (server, extensionPath, changedFile) {
   }
 
   if (
-    features.background.page.html === changedFile ||
-    features.background.scripts.includes(changedFile) ||
-    features.background.page.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.background.page.html) ||
+    features.background.scripts.includes(updatedFile) ||
+    features.background.page.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
       status: 'extensionReload',
@@ -93,9 +102,9 @@ module.exports = async function (server, extensionPath, changedFile) {
   }
 
   if (
-    features.popup.html === changedFile ||
-    features.popup.css.includes(changedFile) ||
-    features.popup.js.includes(changedFile)
+    updatedHtmlFile(updatedFile).includes(features.popup.html) ||
+    features.popup.css.includes(updatedFile) ||
+    features.popup.js.includes(updatedFile)
   ) {
     // TODO: this can be improved
     dispatchMessage(server, {

