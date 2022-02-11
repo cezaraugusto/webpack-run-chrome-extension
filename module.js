@@ -29,6 +29,8 @@ class RunChromeExtension {
 
     // Generate watch files from manifest entries and
     // JS/CSS files defined in HTML files also from the manifest.
+    // Users might wish to ignore it in favo of their own reload
+    // strategies. _reloadService.js includes all of them.
     if (this.autoReload) watchManifestFields(compiler, this.extensionPath)
 
     // Actually watch changes This will trigger different

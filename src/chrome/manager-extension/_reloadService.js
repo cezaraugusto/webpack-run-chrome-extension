@@ -18,26 +18,20 @@ ws.onopen = () => {
 ws.onmessage = async (event) => {
   const message = JSON.parse(event.data)
 
-  if (message.status === 'extensionReload') {
+  if (message.where === 'background') {
     await reloadAllExtensions()
     ws.send(JSON.stringify({ status: 'extensionReloaded' }))
   }
 
-  if (message.status === 'tabReload') {
-    await reloadTab()
-    ws.send(JSON.stringify({ status: 'tabReloaded' }))
-  }
-
-  if (message.status === 'allTabsReload') {
-    await reloadAllTabs()
-    ws.send(JSON.stringify({ status: 'allTabsReloaded' }))
-  }
-
-  if (message.status === 'devtoolsReload') {
-    ws.send(JSON.stringify({ status: 'devtoolsReloaded' }))
-  }
-
-  if (message.status === 'reloadEverything') {
+  if (
+    message.where === 'bookmarks' ||
+    message.where === 'content' ||
+    message.where === 'devtools' ||
+    message.where === 'history' ||
+    message.where === 'newtab' ||
+    message.where === 'options' ||
+    message.where === 'popup'
+  ) {
     await reloadAllExtensions()
     await reloadAllTabs()
     ws.send(JSON.stringify({
@@ -47,33 +41,10 @@ ws.onmessage = async (event) => {
   }
 
   // Response status
-  if (message.status === 'extensionReloaded') {
+  if (message.status === 'reload') {
     console.log(
-      '[Reload Service] Extension reloaded. Watching changes...'
-    )
-  }
-
-  if (message.status === 'tabReloaded') {
-    console.log(
-      '[Reload Service] Current tab reloaded. Watching changes...'
-    )
-  }
-
-  if (message.status === 'allTabsReloaded') {
-    console.log(
-      '[Reload Service] All tabs reloaded. Watching changes...'
-    )
-  }
-
-  if (message.status === 'devtoolsReload') {
-    console.log(
-      '[Reload Service] Developer tools reloaded. Watching changes...'
-    )
-  }
-
-  if (message.status === 'reloadedEverything') {
-    console.log(
-      `[Reload Service] ${message.where} reloaded. Watching changes...`
+      '[Reload Service] Changed detected on ' +
+      message.where + '. Extension reloaded. Watching changes...'
     )
   }
 }

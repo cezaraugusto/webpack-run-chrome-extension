@@ -33,7 +33,7 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.bookmarks.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
-      status: 'reloadEverything',
+      status: 'reload',
       where: 'bookmarks'
     })
   }
@@ -43,7 +43,7 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.content.scripts.includes(updatedFile)
   ) {
     dispatchMessage(server, {
-      status: 'reloadEverything',
+      status: 'reload',
       where: 'content'
     })
   }
@@ -53,8 +53,10 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.devtools.css.includes(updatedFile) ||
     features.devtools.js.includes(updatedFile)
   ) {
-    // TODO: this doesn't work
-    dispatchMessage(server, { status: 'devtoolsReload' })
+    dispatchMessage(server, {
+      status: 'reload',
+      where: 'devtools'
+    })
   }
 
   if (
@@ -63,7 +65,7 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.history.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
-      status: 'reloadEverything',
+      status: 'reload',
       where: 'history'
     })
   }
@@ -74,7 +76,7 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.newtab.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
-      status: 'reloadEverything',
+      status: 'reload',
       where: 'newtab'
     })
   }
@@ -85,7 +87,7 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.options.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
-      status: 'reloadEverything',
+      status: 'reload',
       where: 'options'
     })
   }
@@ -96,7 +98,7 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.background.page.js.includes(updatedFile)
   ) {
     dispatchMessage(server, {
-      status: 'extensionReload',
+      status: 'reload',
       where: 'background'
     })
   }
@@ -106,9 +108,8 @@ module.exports = async function (server, extensionPath, updatedFile) {
     features.popup.css.includes(updatedFile) ||
     features.popup.js.includes(updatedFile)
   ) {
-    // TODO: this can be improved
     dispatchMessage(server, {
-      status: 'reloadEverything',
+      status: 'reload',
       where: 'popup'
     })
   }

@@ -22,9 +22,11 @@ function createChromeExtensionsTab (initialTab) {
 }
 
 chrome.tabs.query({ active: true }, ([initialTab]) => {
-  if (initialTab.url === 'about:blank') {
+	if (
+    initialTab.url === 'chrome://newtab/' ||
+    initialTab.url === 'chrome://welcome/'
+  ) {
     chrome.tabs.update({ url: 'chrome://extensions/' })
-
     return
   }
 
