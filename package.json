@@ -23,10 +23,7 @@
   },
   "files": [
     "module.js",
-    "browser.config.js",
-    "messages.js",
-    "steps/",
-    "manager-extension/"
+    "src"
   ],
   "keywords": [
     "webpack",
