@@ -2,6 +2,7 @@
 [action-url]: https://github.com/cezaraugusto/webpack-run-chrome-extension/actions
 [npm-image]: https://img.shields.io/npm/v/webpack-run-chrome-extension.svg
 [npm-url]: https://npmjs.org/package/webpack-run-chrome-extension
+
 # webpack-run-chrome-extension [![workflow][action-image]][action-url] [![npm][npm-image]][npm-url]
 
 <img src="https://user-images.githubusercontent.com/4672033/103182804-f2bc9a80-488c-11eb-936d-efa5474e384f.png" align=right height=180>
