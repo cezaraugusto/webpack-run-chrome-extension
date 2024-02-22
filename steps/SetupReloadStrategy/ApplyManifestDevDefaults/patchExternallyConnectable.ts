@@ -1,4 +1,6 @@
-export default function patchExternallyConnectable(manifest: any) {
+import {type Manifest} from '../../../types'
+
+export default function patchExternallyConnectable(manifest: Manifest) {
   // If the externally_connectable key is not declared in your extension's
   // manifest, all extensions can connect, but no web pages can connect.
   // As a consequence, when updating your manifest to use externally_connectable,

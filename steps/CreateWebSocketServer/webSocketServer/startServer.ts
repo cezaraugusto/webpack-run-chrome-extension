@@ -1,7 +1,7 @@
 import WebSocket from 'ws'
 import {type Compiler} from 'webpack'
 import messages from '../../../helpers/messages'
-import {StatsPreset} from '../../../types'
+import {type StatsPreset} from '../../../types'
 import isFirstRun from '../../RunChromePlugin/chrome/isFirstRun'
 
 export default function (
@@ -38,7 +38,8 @@ export default function (
 
     // We're only ready when the extension says so
     ws.on('message', (msg) => {
-      const message = JSON.parse(msg.toString())
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
+      const message: Record<string, any> = JSON.parse(msg.toString())
 
       if (message.status === 'clientReady') {
         if (statsConfig === true) {

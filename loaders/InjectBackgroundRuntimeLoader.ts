@@ -94,7 +94,7 @@ export default function (this: InjectBackgroundAcceptContext, source: string) {
   if (manifest.background) {
     if (manifest.background.scripts) {
       for (const bgScript of [manifest.background.scripts[0]]) {
-        const absoluteUrl = path.resolve(projectPath, bgScript)
+        const absoluteUrl = path.resolve(projectPath, bgScript as string)
 
         if (url.includes(absoluteUrl)) {
           return `${generalReloadCode}${source}`
@@ -105,7 +105,7 @@ export default function (this: InjectBackgroundAcceptContext, source: string) {
     if (manifest.background.service_worker) {
       const absoluteUrl = path.resolve(
         projectPath,
-        manifest.background.service_worker
+        manifest.background.service_worker as string
       )
       if (url.includes(absoluteUrl)) {
         return `${generalReloadCode}${source}`

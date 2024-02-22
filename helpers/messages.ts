@@ -1,5 +1,5 @@
 import path from 'path'
-import {Compiler} from 'webpack'
+import {type Compiler} from 'webpack'
 import {log, error} from 'console'
 import {
   underline,
@@ -14,7 +14,7 @@ import {
 // @ts-ignore
 import prefersYarn from 'prefers-yarn'
 import getDirectorySize from '../steps/calculateDirSize'
-import {ManifestBase} from '../manifest-types'
+import {type ManifestBase} from '../manifest-types'
 
 interface Data {
   id: string
@@ -58,7 +58,7 @@ Ensure your extension is enabled and that no hanging Chrome instance is open the
   }
 
   const compilerOptions = compiler.options
-  const {id, manifest, management} = message.data
+  const {id, management} = message.data
 
   if (!management) {
     if (process.env.EXTENSION_ENV === 'development') {
@@ -84,7 +84,6 @@ Ensure your extension is enabled and that no hanging Chrome instance is open the
   })
   const fixedId = manifestFromCompiler.id === id
   const hasHost = hostPermissions && hostPermissions.length
-  management.enabled
 
   log('')
   log(`${bold(`• Name:`)} ${name}`)
