@@ -12,12 +12,12 @@ Opens up a new Chrome instance with an extension loaded. Resources declared in m
 
 ## Highlights
 
-* Zero-config auto-reload for [virtually everything](https://github.com/cezaraugusto/webpack-run-chrome-extension/issues/4) including all HTML overrides, and every resource you plan to require via `<script>` and `<link>` in manifest declared HTML pages.
-* Fresh profile with developer mode enabled by default on every run. (customizable)
-* Opens the handy "chrome://extensions" by default for fast debugging.
-* Uses the system browser instead of fully downloading Chrome. (accepts Canary builds)
-* Closing the webpack process instantly kills all child processes. No extra steps to open/close Chrome.
-* Supports [virtually all Chrome flags](https://peter.sh/experiments/chromium-command-line-switches/).
+- Zero-config auto-reload for [virtually everything](https://github.com/cezaraugusto/webpack-run-chrome-extension/issues/4) including all HTML overrides, and every resource you plan to require via `<script>` and `<link>` in manifest declared HTML pages.
+- Fresh profile with developer mode enabled by default on every run. (customizable)
+- Opens the handy "chrome://extensions" by default for fast debugging.
+- Uses the system browser instead of fully downloading Chrome. (accepts Canary builds)
+- Closing the webpack process instantly kills all child processes. No extra steps to open/close Chrome.
+- Supports [virtually all Chrome flags](https://peter.sh/experiments/chromium-command-line-switches/).
 
 ## See it in action
 
@@ -70,7 +70,6 @@ new RunChromeExtension({
   port: 8081
 })
 ```
-
 
 ## API
 
