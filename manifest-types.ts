@@ -1,4 +1,6 @@
-export type ManifestIcons = Record<number, string>
+export interface ManifestIcons {
+  [size: number]: string
+}
 
 export interface SearchProvider {
   name?: string | undefined
@@ -143,9 +145,8 @@ export interface ManifestBase {
       }
     | undefined
   commands?:
-    | Record<
-        string,
-        {
+    | {
+        [name: string]: {
           suggested_key?:
             | {
                 default?: string | undefined
@@ -158,7 +159,7 @@ export interface ManifestBase {
           description?: string | undefined
           global?: boolean | undefined
         }
-      >
+      }
     | undefined
   content_capabilities?:
     | {
