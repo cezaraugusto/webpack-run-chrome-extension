@@ -3,6 +3,7 @@ import {urlToRequest} from 'loader-utils'
 import {validate} from 'schema-utils'
 import {type LoaderContext} from 'webpack'
 import {type Schema} from 'schema-utils/declarations/validate'
+import {type Manifest} from '../types'
 
 const schema: Schema = {
   type: 'object',
@@ -22,19 +23,16 @@ interface InjectBackgroundAcceptContext extends LoaderContext<any> {
   }
 }
 
-let defaultBgEmitted = false
 export default function (this: InjectBackgroundAcceptContext, source: string) {
   const options = this.getOptions()
   const manifestPath = options.manifestPath
   const projectPath = path.dirname(manifestPath)
-  const manifest = require(manifestPath)
+  const manifest: Manifest = require(manifestPath)
 
   validate(schema, options, {
     name: 'Inject Reload (background.scripts and background.service_worker) Script',
     baseDataPath: 'options'
   })
-
-  if (this._compilation?.options.mode === 'production') return source
 
   const url = urlToRequest(this.resourcePath)
 
@@ -94,7 +92,7 @@ export default function (this: InjectBackgroundAcceptContext, source: string) {
   if (manifest.background) {
     if (manifest.background.scripts) {
       for (const bgScript of [manifest.background.scripts[0]]) {
-        const absoluteUrl = path.resolve(projectPath, bgScript)
+        const absoluteUrl = path.resolve(projectPath, bgScript as string)
 
         if (url.includes(absoluteUrl)) {
           return `${generalReloadCode}${source}`
@@ -105,26 +103,10 @@ export default function (this: InjectBackgroundAcceptContext, source: string) {
     if (manifest.background.service_worker) {
       const absoluteUrl = path.resolve(
         projectPath,
-        manifest.background.service_worker
+        manifest.background.service_worker as string
       )
       if (url.includes(absoluteUrl)) {
         return `${generalReloadCode}${source}`
-      }
-    }
-  }
-
-  if (!manifest.background) {
-    if (manifest.manifest_version === 2) {
-      if (!defaultBgEmitted) {
-        this.emitFile('background/script' + '.js', generalReloadCode)
-        defaultBgEmitted = true
-      }
-    }
-
-    if (manifest.manifest_version === 3) {
-      if (!defaultBgEmitted) {
-        this.emitFile('background/service_worker' + '.js', generalReloadCode)
-        defaultBgEmitted = true
       }
     }
   }

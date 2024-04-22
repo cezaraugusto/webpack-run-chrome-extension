@@ -1,6 +1,6 @@
 import type webpack from 'webpack'
 import {Compilation, sources} from 'webpack'
-import {patchV2CSP} from './patchCSP'
+import {patchV2CSP, patchV3CSP} from './patchCSP'
 import {patchWebResourcesV2, patchWebResourcesV3} from './patchWebResources'
 import patchBackground from './patchBackground'
 import patchExternallyConnectable from './patchExternallyConnectable'
@@ -24,8 +24,10 @@ class ApplyManifestDevDefaultsPlugin {
       // script-src 'self' 'unsafe-eval';
       // See https://github.com/awesome-webextension/webpack-target-webextension#source-map.
       // For V3, see https://developer.chrome.com/docs/extensions/migrating/improve-security/#update-csp
-      ...(manifest.manifest_version === 2 &&
-        patchV2CSP(manifest.content_security_policy)),
+      content_security_policy:
+        manifest.manifest_version === 3
+          ? patchV3CSP(manifest)
+          : patchV2CSP(manifest),
 
       // Set permission scripting as it's required for reload to work
       // with content scripts in v3. See:
@@ -66,9 +68,6 @@ class ApplyManifestDevDefaultsPlugin {
       'RunChromeExtension (ApplyManifestDevDefaults)',
       (compilation) => {
         const Error = compiler.webpack.WebpackError
-
-        // This plugin only works during development
-        if (compiler.options.mode === 'production') return
 
         compilation.hooks.processAssets.tap(
           {

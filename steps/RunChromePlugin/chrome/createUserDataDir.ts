@@ -3,7 +3,8 @@
 // Released under MIT license.
 
 import path from 'path'
-import fs from 'fs-extra'
+import fs from 'fs'
+import {bold} from '@colors/colors/safe'
 import addProgressBar from '../../../helpers/addProgressBar'
 import masterPreferences from './masterPreferences'
 
@@ -21,16 +22,21 @@ export default function createUserDataDir(
   const userProfile = JSON.stringify(masterPreferences)
 
   if (!silent) {
-    addProgressBar('👤 Creating user data directory...', () => {
-      const outputPath = path.resolve(__dirname, 'run-chrome-data-dir')
-      const preferences = path.join(outputPath, 'Default')
-      fs.ensureDirSync(preferences)
+    addProgressBar(
+      `👤 Creating ${bold('Chrome')} user data directory...`,
+      () => {
+        const outputPath = path.resolve(__dirname, 'run-chrome-data-dir')
+        const preferences = path.join(outputPath, 'Default')
 
-      const preferencesPath = path.join(preferences, 'Preferences')
+        // Ensure directory exists
+        fs.mkdirSync(preferences, {recursive: true})
 
-      // Actually write the user preferences
-      fs.writeFileSync(preferencesPath, userProfile, 'utf8')
-    })
+        const preferencesPath = path.join(preferences, 'Preferences')
+
+        // Actually write the user preferences
+        fs.writeFileSync(preferencesPath, userProfile, 'utf8')
+      }
+    )
   }
 
   return path.resolve(__dirname, 'run-chrome-data-dir')

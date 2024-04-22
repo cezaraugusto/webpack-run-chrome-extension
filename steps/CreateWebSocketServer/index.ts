@@ -25,14 +25,14 @@ export default class CreateWebSocketServer {
     rewriteFirstRunVariable()
 
     // Start webSocket server to communicate with the extension.
-    const startConfig = this.options.stats
-    const wss = startServer(compiler, startConfig, this.options.port)
+    const statConfig = this.options.stats
+    const wss = startServer(compiler, statConfig, this.options.port)
 
     compiler.hooks.watchRun.tapAsync(
       'RunChromeExtensionPlugin (CreateWebSocketServer)',
       (compiler, done) => {
         const files = compiler.modifiedFiles || new Set()
-        const changedFile = files.values().next().value
+        const changedFile: string | undefined = files.values().next().value
 
         if (!changedFile) {
           done()
@@ -45,9 +45,11 @@ export default class CreateWebSocketServer {
         )
 
         const context = path.relative(process.cwd(), path.dirname(changedFile))
-        console.info(
-          `►► Updated file \`${relativePath}\` (relative to ${context})`
-        )
+        if (process.env.EXTENSION_ENV === 'development') {
+          console.info(
+            `►► Updated file \`${relativePath}\` (relative to ${context})`
+          )
+        }
 
         if (this.options.manifestPath) {
           messageDispatcher(wss, this.options, changedFile)

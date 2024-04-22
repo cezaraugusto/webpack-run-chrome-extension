@@ -16,11 +16,14 @@ async function getUserExtension() {
 async function onStartup() {
   const userExtension = await getUserExtension()
   const extensionName = document.getElementById('extensionName')
-  extensionName.innerText = userExtension[0].name
+  const extensionDescription = document.getElementById('extensionDescription')
 
-  document.getElementById('closeTab').addEventListener('click', () => {
-    window.close()
-  })
+  extensionName.innerText = userExtension[0].name
+  extensionName.title = `• Name: ${userExtension[0].name}
+• ID: ${userExtension[0].id}
+• Version: ${userExtension[0].version}`
+
+  extensionDescription.innerText = userExtension[0].description
 
   const learnMore = document.getElementById('learnMore')
   learnMore.addEventListener('click', () => {
