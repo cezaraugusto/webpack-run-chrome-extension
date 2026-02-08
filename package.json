@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@colors/colors": "^1.6.0",
-    "browser-extension-manifest-fields": "*",
+    "browser-extension-manifest-fields": "2.0.0",
     "chrome-location": "^1.2.1",
     "content-security-policy-parser": "^0.4.1",
     "loader-utils": "^3.2.1",
